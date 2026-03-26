@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../widgets/app_image.dart';
 
 /// Reusable card for places, cuisines, businesses.
 class PlaceCard extends StatelessWidget {
@@ -35,17 +36,15 @@ class PlaceCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Emoji icon area
+            // Custom AppImage for PlaceCard
             Container(
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: AppTheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Center(
-                child: Text(emoji, style: const TextStyle(fontSize: 28)),
-              ),
+              clipBehavior: Clip.antiAlias,
+              child: AppImage(emoji), // Reusing 'emoji' parameter for asset path temporarily
             ),
             const SizedBox(width: 16),
 

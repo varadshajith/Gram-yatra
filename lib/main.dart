@@ -18,6 +18,8 @@ import 'screens/traveler_experience_screen.dart';
 import 'screens/events_screen.dart';
 import 'screens/festivals_screen.dart';
 
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -29,11 +31,20 @@ class GramYatraApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gram Yatra',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme,
-      initialRoute: '/',
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (context, ThemeMode currentMode, child) {
+        return MaterialApp(
+          title: 'Gram Yatra',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.theme,
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            brightness: Brightness.dark,
+            colorSchemeSeed: AppTheme.primary,
+          ),
+          themeMode: currentMode,
+          initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
         '/login': (context) => const LoginScreen(),
@@ -50,6 +61,8 @@ class GramYatraApp extends StatelessWidget {
         '/traveler-experience': (context) => const TravelerExperienceScreen(),
         '/events': (context) => const EventsScreen(),
         '/festivals': (context) => const FestivalsScreen(),
+      },
+        );
       },
     );
   }

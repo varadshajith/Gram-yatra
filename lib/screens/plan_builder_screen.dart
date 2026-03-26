@@ -18,11 +18,11 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
   final Set<String> _selectedPrefs = {};
 
   final _preferences = [
-    AppStrings.pilgrimage,
-    AppStrings.nature,
-    AppStrings.food,
-    AppStrings.art,
-    AppStrings.shopping,
+    {'label': AppStrings.pilgrimage, 'icon': Icons.account_balance},
+    {'label': AppStrings.nature, 'icon': Icons.park},
+    {'label': AppStrings.food, 'icon': Icons.restaurant},
+    {'label': AppStrings.art, 'icon': Icons.palette},
+    {'label': AppStrings.shopping, 'icon': Icons.shopping_bag},
   ];
 
   @override
@@ -171,13 +171,15 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
               spacing: 10,
               runSpacing: 10,
               children: _preferences.map((pref) => CategoryChip(
-                label: pref,
-                isSelected: _selectedPrefs.contains(pref),
+                label: pref['label'] as String,
+                icon: pref['icon'] as IconData,
+                isSelected: _selectedPrefs.contains(pref['label']),
                 onTap: () => setState(() {
-                  if (_selectedPrefs.contains(pref)) {
-                    _selectedPrefs.remove(pref);
+                  final label = pref['label'] as String;
+                  if (_selectedPrefs.contains(label)) {
+                    _selectedPrefs.remove(label);
                   } else {
-                    _selectedPrefs.add(pref);
+                    _selectedPrefs.add(label);
                   }
                 }),
               )).toList(),

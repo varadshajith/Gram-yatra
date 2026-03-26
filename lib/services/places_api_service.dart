@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import '../utils/api_keys.dart';
@@ -35,7 +36,7 @@ class PlacesApiService {
         throw Exception('Failed to load places from API');
       }
     } catch (e) {
-      print('API fetch failed: $e. Falling back to offline data.');
+      debugPrint('API fetch failed: $e. Falling back to offline data.');
       return _getFallbackData();
     }
   }
@@ -69,7 +70,7 @@ class PlacesApiService {
       
       return places;
     } catch (e) {
-      print('Error loading asset fallback: $e');
+      debugPrint('Error loading asset fallback: $e');
       return [];
     }
   }

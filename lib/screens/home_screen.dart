@@ -92,13 +92,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       children: [
-                        _SectionTab(label: '🛕 Attractions', onTap: () => Navigator.pushNamed(context, '/top-attractions')),
-                        _SectionTab(label: '🍛 Cuisine', onTap: () => Navigator.pushNamed(context, '/cuisine')),
-                        _SectionTab(label: '🏭 Business', onTap: () => Navigator.pushNamed(context, '/local-business')),
-                        _SectionTab(label: '🚗 Road Trips', onTap: () => Navigator.pushNamed(context, '/road-trips')),
-                        _SectionTab(label: '📸 Stories', onTap: () => Navigator.pushNamed(context, '/traveler-experience')),
-                        _SectionTab(label: '🎪 Events', onTap: () => Navigator.pushNamed(context, '/events')),
-                        _SectionTab(label: '🎉 Festivals', onTap: () => Navigator.pushNamed(context, '/festivals')),
+                        _SectionTab(icon: Icons.place, label: 'Attractions', onTap: () => Navigator.pushNamed(context, '/top-attractions')),
+                        _SectionTab(icon: Icons.restaurant, label: 'Cuisine', onTap: () => Navigator.pushNamed(context, '/cuisine')),
+                        _SectionTab(icon: Icons.storefront, label: 'Business', onTap: () => Navigator.pushNamed(context, '/local-business')),
+                        _SectionTab(icon: Icons.directions_car, label: 'Road Trips', onTap: () => Navigator.pushNamed(context, '/road-trips')),
+                        _SectionTab(icon: Icons.camera_alt, label: 'Stories', onTap: () => Navigator.pushNamed(context, '/traveler-experience')),
+                        _SectionTab(icon: Icons.event, label: 'Events', onTap: () => Navigator.pushNamed(context, '/events')),
+                        _SectionTab(icon: Icons.celebration, label: 'Festivals', onTap: () => Navigator.pushNamed(context, '/festivals')),
                       ],
                     ),
                   ),
@@ -261,9 +261,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _SectionTab extends StatelessWidget {
   final String label;
+  final IconData icon;
   final VoidCallback onTap;
 
-  const _SectionTab({required this.label, required this.onTap});
+  const _SectionTab({required this.label, required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -278,11 +279,18 @@ class _SectionTab extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppTheme.radiusFull),
           ),
           child: Center(
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 16, color: AppTheme.onSurface),
+                const SizedBox(width: 6),
+                Text(
+                  label,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

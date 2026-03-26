@@ -72,12 +72,12 @@ class BusinessCategoryScreen extends StatelessWidget {
 
   String _categoryEmoji(String category) {
     switch (category) {
-      case 'Architecture': return '🏛️';
-      case 'Agriculture': return '🌾';
-      case 'Manufacturing': return '🏭';
-      case 'Tourism Services': return '🗺️';
-      case 'Traditional Fashion': return '👘';
-      default: return '🏢';
+      case 'Architecture': return 'assets/images/arhitecture.jpeg';
+      case 'Agriculture': return 'assets/images/Agriculture.jpeg';
+      case 'Manufacturing': return 'assets/images/taparia.jpeg';
+      case 'Tourism Services': return 'assets/images/tourisms.jpeg';
+      case 'Traditional Fashion': return 'assets/images/traditionalfashion.jpeg';
+      default: return 'assets/images/tourisms.jpeg';
     }
   }
 }

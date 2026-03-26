@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../widgets/gradient_button.dart';
+import '../widgets/app_image.dart';
 
 /// Screen 2: Login Screen
 class LoginScreen extends StatefulWidget {
@@ -37,17 +38,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF6B1A33),
-                      Color(0xFF4E021E),
-                    ],
-                  ),
                 ),
+                clipBehavior: Clip.antiAlias,
                 child: Stack(
+                  fit: StackFit.expand,
                   children: [
+                    const AppImage('assets/images/Loginpage.jpeg'),
+                    Container(
+                      color: Colors.black.withValues(alpha: 0.5),
+                    ),
                     Positioned(
                       right: 20,
                       bottom: 20,

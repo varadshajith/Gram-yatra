@@ -104,18 +104,27 @@ class _CuisineScreenState extends State<CuisineScreen> {
             const SizedBox(height: 24),
 
             // Filtered results
-            ..._filteredCuisine.map((food) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: PlaceCard(
-                emoji: food['icon']!,
-                name: food['name']!,
-                description: food['type']!,
-                rating: food['rating'],
-                onTap: () {},
+            SizedBox(
+              height: 100, // Fixed height for horizontal PlaceCards
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: _filteredCuisine.length,
+                separatorBuilder: (context, index) => const SizedBox(width: 16),
+                itemBuilder: (context, index) {
+                  final food = _filteredCuisine[index];
+                  return SizedBox(
+                    width: 300, // Fixed width for horizontal cards
+                    child: PlaceCard(
+                      emoji: food['icon']!,
+                      name: food['name']!,
+                      description: food['type']!,
+                      rating: food['rating'],
+                      onTap: () {},
+                    ),
+                  );
+                },
               ),
-            )),
-
-            const SizedBox(height: 24),
+            ),
           ],
         ),
       ),

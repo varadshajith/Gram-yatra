@@ -6,12 +6,14 @@ class CategoryChip extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
+  final IconData? icon;
 
   const CategoryChip({
     super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
+    this.icon,
   });
 
   @override
@@ -25,12 +27,25 @@ class CategoryChip extends StatelessWidget {
           color: isSelected ? AppTheme.primaryFixedDim : AppTheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(AppTheme.radiusFull),
         ),
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isSelected ? AppTheme.primary : AppTheme.onSurface,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              Icon(
+                icon,
+                size: 16,
+                color: isSelected ? AppTheme.primary : AppTheme.onSurface,
+              ),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: isSelected ? AppTheme.primary : AppTheme.onSurface,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              ),
+            ),
+          ],
         ),
       ),
     );

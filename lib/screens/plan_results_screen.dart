@@ -63,25 +63,37 @@ class PlanResultsScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Plan cards
-            ...plans.map((plan) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: PlanCard(
-                name: plan['name'] as String,
-                tagline: plan['tagline'] as String,
-                stops: List<String>.from(plan['stops'] as List),
-                estimatedCost: plan['estimatedCost'] as String,
-                highlights: plan['highlights'] as String,
-                duration: plan['duration'] as String,
-                onStart: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Starting: ${plan['name']}'),
-                      backgroundColor: AppTheme.primary,
-                    ),
-                  );
-                },
-              ),
-            )),
+            ...plans.asMap().entries.map((entry) {
+              final index = entry.key;
+              final plan = entry.value;
+
+              final bgAssets = [
+                'assets/images/trimbakeshwar.jpg', // Pilgrim's path
+                'assets/images/sula_vineyards.jpg', // Wine & Dine
+                'assets/images/anjaneri_hills.jpg', // Hidden Nashik
+              ];
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: PlanCard(
+                  name: plan['name'] as String,
+                  tagline: plan['tagline'] as String,
+                  stops: List<String>.from(plan['stops'] as List),
+                  estimatedCost: plan['estimatedCost'] as String,
+                  highlights: plan['highlights'] as String,
+                  duration: plan['duration'] as String,
+                  bgImageAsset: index < bgAssets.length ? bgAssets[index] : null,
+                  onStart: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Starting: ${plan['name']}'),
+                        backgroundColor: AppTheme.primary,
+                      ),
+                    );
+                  },
+                ),
+              );
+            }),
 
             const SizedBox(height: 24),
           ],

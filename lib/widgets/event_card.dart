@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../widgets/app_image.dart';
 
 /// Card for events and festivals.
 class EventCard extends StatelessWidget {
@@ -36,7 +37,15 @@ class EventCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(icon, style: const TextStyle(fontSize: 32)),
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: AppImage(icon),
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -79,25 +88,19 @@ class EventCard extends StatelessWidget {
             if (highlight != null) ...[
               const SizedBox(height: AppTheme.spacingSmall),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppTheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                  color: AppTheme.secondaryContainer.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: AppTheme.secondary.withValues(alpha: 0.3)),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.auto_awesome, size: 14, color: AppTheme.secondary),
-                    const SizedBox(width: 6),
-                    Text(
-                      highlight!,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.onSurface,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  highlight!.toUpperCase(),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: AppTheme.secondary,
+                    letterSpacing: 1.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],

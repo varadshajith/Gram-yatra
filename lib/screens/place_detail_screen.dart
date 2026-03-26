@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../widgets/gradient_button.dart';
+import '../widgets/app_image.dart';
 
 /// Screen 8: Individual Place Detail
 class PlaceDetailScreen extends StatelessWidget {
@@ -34,20 +35,23 @@ class PlaceDetailScreen extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
             ),
             flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF6B1A33),
-                      Color(0xFF4E021E),
-                    ],
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  AppImage(emoji),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.5),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(emoji, style: const TextStyle(fontSize: 80)),
-                ),
+                ],
               ),
             ),
           ),
@@ -132,53 +136,6 @@ class PlaceDetailScreen extends StatelessWidget {
                         _InfoRow(icon: Icons.currency_rupee, label: 'Entry Fee', value: 'Free'),
                         const SizedBox(height: 16),
                         _InfoRow(icon: Icons.calendar_today, label: 'Best Time', value: 'Oct – Feb'),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // AR/VR button
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppTheme.tertiaryContainer.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: AppTheme.tertiary.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(Icons.view_in_ar_rounded, color: AppTheme.tertiary),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Explore in AR/VR',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppTheme.tertiary,
-                                ),
-                              ),
-                              Text(
-                                'Virtual tour before you visit',
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: AppTheme.onSurfaceVariant,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Icon(Icons.chevron_right_rounded, color: AppTheme.tertiary),
                       ],
                     ),
                   ),

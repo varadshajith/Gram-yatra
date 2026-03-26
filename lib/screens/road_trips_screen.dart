@@ -3,6 +3,8 @@ import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../utils/constants.dart';
 import '../widgets/section_header.dart';
+import '../widgets/app_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Screen 12: Road Trips from Nashik
 class RoadTripsScreen extends StatelessWidget {
@@ -80,7 +82,15 @@ class _RoadTripCardState extends State<_RoadTripCard> {
           children: [
             Row(
               children: [
-                Text(trip['icon']!, style: const TextStyle(fontSize: 36)),
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: AppImage(trip['icon']!),
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -142,21 +152,36 @@ class _RoadTripCardState extends State<_RoadTripCard> {
               const SizedBox(height: 16),
 
               // Map placeholder
-              Container(
-                height: 120,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppTheme.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.map_rounded, size: 32, color: AppTheme.onSurfaceVariant),
-                      SizedBox(height: 4),
-                      Text('Route Map', style: TextStyle(color: AppTheme.onSurfaceVariant, fontSize: 12)),
-                    ],
+              GestureDetector(
+                onTap: () async {
+                  final query = Uri.encodeComponent('${trip['name']} Nashik');
+                  final url = Uri.parse('https://maps.google.com/?q=$query');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Could not launch maps')),
+                      );
+                    }
+                  }
+                },
+                child: Container(
+                  height: 120,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppTheme.surfaceContainerHigh,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.map_rounded, size: 32, color: AppTheme.onSurfaceVariant),
+                        SizedBox(height: 4),
+                        Text('Route Map', style: TextStyle(color: AppTheme.onSurfaceVariant, fontSize: 12)),
+                      ],
+                    ),
                   ),
                 ),
               ),
