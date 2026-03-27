@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../utils/constants.dart';
+import '../widgets/app_image.dart';
 
 /// Screen 10: Local Business Discovery
 class LocalBusinessScreen extends StatelessWidget {
@@ -76,31 +77,44 @@ class LocalBusinessScreen extends StatelessWidget {
                     arguments: cat['name'],
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppTheme.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(AppTheme.radiusMd),
                       boxShadow: AppTheme.ambientShadow,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    clipBehavior: Clip.antiAlias,
+                    child: Stack(
+                      fit: StackFit.expand,
                       children: [
-                        Text(cat['icon']!, style: const TextStyle(fontSize: 36)),
-                        const SizedBox(height: 12),
-                        Text(
-                          cat['name']!,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                          textAlign: TextAlign.center,
+                        AppImage(cat['icon']!),
+                        Container(
+                          color: Colors.black.withValues(alpha: 0.4),
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${cat['count']} businesses',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: 12,
-                            color: AppTheme.onSurfaceVariant,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              cat['name']!,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.5),
+                                borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                              ),
+                              child: Text(
+                                '${cat['count']} businesses',
+                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

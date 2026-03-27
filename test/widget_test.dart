@@ -13,7 +13,7 @@ import 'package:gram_yatra/main.dart';
 void main() {
   testWidgets('App loads smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const GramYatraApp());
+    await tester.pumpWidget(const GramYatraApp(initialRoute: '/'));
 
     // Verify that the app mounts properly.
     expect(find.byType(MaterialApp), findsOneWidget);

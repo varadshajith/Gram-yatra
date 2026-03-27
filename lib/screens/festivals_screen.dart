@@ -4,6 +4,7 @@ import '../utils/strings.dart';
 import '../utils/constants.dart';
 import '../widgets/section_header.dart';
 import '../widgets/event_card.dart';
+import '../widgets/app_image.dart';
 
 /// Screen 15: Festivals Dhamaka
 class FestivalsScreen extends StatelessWidget {
@@ -38,33 +39,46 @@ class FestivalsScreen extends StatelessWidget {
             // Hero banner
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF4E021E), Color(0xFF6B1A33)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
                 borderRadius: BorderRadius.circular(AppTheme.radiusMd),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  const Text('🎉', style: TextStyle(fontSize: 40)),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Festival Capital\nof Maharashtra',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      height: 1.2,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'From Kumbh Mela to Rang Panchami, experience festivals like nowhere else.',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.primaryFixedDim.withValues(alpha: 0.9),
+                   const AppImage('assets/images/Kumbhamela.jpeg'),
+                   Container(
+                     decoration: BoxDecoration(
+                       gradient: LinearGradient(
+                         colors: [Color(0xFF4E021E).withValues(alpha: 0.7), Color(0xFF6B1A33).withValues(alpha: 0.7)],
+                         begin: Alignment.topLeft,
+                         end: Alignment.bottomRight,
+                       ),
+                     ),
+                   ),
+                   Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('🎉', style: TextStyle(fontSize: 40)),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Festival Capital\nof Maharashtra',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'From Kumbh Mela to Rang Panchami, experience festivals like nowhere else.',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppTheme.primaryFixedDim.withValues(alpha: 0.9),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

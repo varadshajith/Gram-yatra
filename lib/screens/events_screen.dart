@@ -21,7 +21,35 @@ class EventsScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.calendar_month_rounded),
-            onPressed: () {},
+            onPressed: () async {
+              final date = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 365)),
+                builder: (context, child) {
+                  return Theme(
+                    data: Theme.of(context).copyWith(
+                      colorScheme: const ColorScheme.light(
+                        primary: AppTheme.primary,
+                        onPrimary: Colors.white,
+                        surface: AppTheme.surfaceContainerLowest,
+                        onSurface: AppTheme.onSurface,
+                      ),
+                    ),
+                    child: child!,
+                  );
+                },
+              );
+              if (date != null && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Events for ${date.day}/${date.month}/${date.year} coming soon'),
+                    backgroundColor: AppTheme.primary,
+                  ),
+                );
+              }
+            },
           ),
         ],
       ),

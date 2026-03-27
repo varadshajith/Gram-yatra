@@ -80,28 +80,6 @@ class TopAttractionsScreen extends StatelessWidget {
                       description: place['description']!,
                       rating: place['rating'],
                       onTap: () => Navigator.pushNamed(context, '/place-detail', arguments: place),
-                      action: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: AppTheme.tertiaryContainer.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.view_in_ar_rounded, size: 14, color: AppTheme.tertiary),
-                            const SizedBox(width: 4),
-                            Text(
-                              'AR/VR',
-                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: AppTheme.tertiary,
-                                letterSpacing: 0.5,
-                                fontSize: 10,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                   ],
                 ),

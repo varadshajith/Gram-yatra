@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../utils/constants.dart';
+import '../widgets/app_image.dart';
 
 /// Screen 13: Traveler Experience Blog / Feed
 class TravelerExperienceScreen extends StatelessWidget {
@@ -138,11 +139,12 @@ class _TravelerPost extends StatelessWidget {
               Container(
                 width: 40,
                 height: 40,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppTheme.surfaceContainerHigh,
                   shape: BoxShape.circle,
                 ),
-                child: Center(child: Text(post['avatar']!, style: const TextStyle(fontSize: 22))),
+                clipBehavior: Clip.antiAlias,
+                child: AppImage(post['avatar']!),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -189,7 +191,7 @@ class _TravelerPost extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // Image placeholder
+          // Image placeholder with Shimmer fallback
           Container(
             height: 180,
             width: double.infinity,
@@ -197,12 +199,16 @@ class _TravelerPost extends StatelessWidget {
               color: AppTheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Center(
-              child: Icon(
-                post['type'] == 'video' ? Icons.play_circle_outline : Icons.image_rounded,
-                size: 48,
-                color: AppTheme.outline,
-              ),
+            clipBehavior: Clip.antiAlias,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                AppImage(post['image'] ?? ''),
+                if (post['type'] == 'video')
+                  const Center(
+                    child: Icon(Icons.play_circle_outline, size: 48, color: Colors.white70),
+                  ),
+              ],
             ),
           ),
 
