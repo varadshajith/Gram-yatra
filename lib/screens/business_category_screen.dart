@@ -42,70 +42,87 @@ class _BusinessCategoryScreenState extends State<BusinessCategoryScreen> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-
-            Text(
-              'Discover $category businesses in Nashik',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Manufacturing.jpeg',
+              fit: BoxFit.cover,
             ),
-
-            const SizedBox(height: 16),
-
-            // Search bar
-            TextField(
-              controller: _searchController,
-              onChanged: (value) => setState(() => _searchQuery = value),
-              decoration: InputDecoration(
-                hintText: 'Search $category...',
-                prefixIcon: const Icon(Icons.search_rounded),
-                filled: true,
-                fillColor: AppTheme.surfaceContainerLow,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
-              ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
             ),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
 
-            const SizedBox(height: 24),
-
-            SectionHeader(title: '$category in Nashik'),
-
-            ...businesses.map((biz) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: PlaceCard(
-                emoji: biz['image'] ?? _fallbackImage(category),
-                name: biz['name']!,
-                description: biz['desc']!,
-                rating: biz['rating'],
-                onTap: () {},
-              ),
-            )),
-
-            if (businesses.isEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 40),
-                child: Center(
-                  child: Text(
-                    'No businesses found in this category',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.onSurfaceVariant,
-                    ),
+                Text(
+                  'Discover $category businesses in Nashik',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white70,
                   ),
                 ),
-              ),
 
-            const SizedBox(height: 24),
-          ],
-        ),
+                const SizedBox(height: 16),
+
+                // Search bar
+                TextField(
+                  controller: _searchController,
+                  style: const TextStyle(color: Colors.white),
+                  onChanged: (value) => setState(() => _searchQuery = value),
+                  decoration: InputDecoration(
+                    hintText: 'Search $category...',
+                    hintStyle: const TextStyle(color: Colors.white38),
+                    prefixIcon: const Icon(Icons.search_rounded, color: Colors.white70),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                SectionHeader(title: '$category in Nashik'),
+
+                ...businesses.map((biz) => Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: PlaceCard(
+                    emoji: biz['image'] ?? _fallbackImage(category),
+                    name: biz['name']!,
+                    description: biz['desc']!,
+                    rating: biz['rating'],
+                    onTap: () {},
+                  ),
+                )),
+
+                if (businesses.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Center(
+                      child: Text(
+                        'No businesses found in this category',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -20,32 +20,47 @@ class RoadTripsScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-
-            Text(
-              'Scenic drives and day trips around Nashik',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Harishchandragad.jpeg',
+              fit: BoxFit.cover,
             ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
 
-            const SizedBox(height: 24),
+                Text(
+                  'Scenic drives and day trips around Nashik',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white70,
+                  ),
+                ),
 
-            const SectionHeader(title: 'Popular Trips'),
+                const SizedBox(height: 24),
 
-            ...MockData.roadTrips.map((trip) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _RoadTripCard(trip: trip),
-            )),
+                const SectionHeader(title: 'Popular Trips'),
 
-            const SizedBox(height: 24),
-          ],
-        ),
+                ...MockData.roadTrips.map((trip) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: _RoadTripCard(trip: trip),
+                )),
+
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

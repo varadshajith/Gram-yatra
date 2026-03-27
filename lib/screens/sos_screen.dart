@@ -22,41 +22,56 @@ class SosScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(24),
-        itemCount: helplines.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
-        itemBuilder: (context, index) {
-          final h = helplines[index];
-          return Card(
-            color: AppTheme.surfaceContainerLowest,
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              leading: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(h['icon'] as IconData, color: Colors.red),
-              ),
-              title: Text(
-                h['name'] as String,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              subtitle: Text(
-                h['number'] as String,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppTheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              trailing: const Icon(Icons.call, color: AppTheme.primary),
-              onTap: () {},
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Background for app.jpg',
+              fit: BoxFit.cover,
             ),
-          );
-        },
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
+          ListView.separated(
+            padding: const EdgeInsets.all(24),
+            itemCount: helplines.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
+            itemBuilder: (context, index) {
+              final h = helplines[index];
+              return Card(
+                color: AppTheme.surfaceContainerLowest.withValues(alpha: 0.9),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  leading: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(h['icon'] as IconData, color: Colors.red),
+                  ),
+                  title: Text(
+                    h['name'] as String,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  subtitle: Text(
+                    h['number'] as String,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppTheme.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  trailing: const Icon(Icons.call, color: AppTheme.primary),
+                  onTap: () {},
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -35,156 +35,172 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 16),
-
-            // Subtitle
-            Text(
-              'Let AI craft the perfect Nashik day for you',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Welcomepage.jpeg',
+              fit: BoxFit.cover,
             ),
-
-            const SizedBox(height: 32),
-
-            // Current location
-            Text(AppStrings.currentLocation, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 12),
-            TextField(
-              controller: TextEditingController(text: 'Nashik City Center'),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.my_location_rounded, color: AppTheme.secondary, size: 20),
-                filled: true,
-                fillColor: AppTheme.surfaceContainerLow,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                  borderSide: BorderSide.none,
-                ),
-              ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
             ),
-
-            const SizedBox(height: 28),
-
-            // Time preference
-            Text(AppStrings.timePref, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 16),
+
+                // Subtitle
                 Text(
-                  '${_hours.toInt()} hours',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.primary,
-                  ),
-                ),
-                Text(
-                  'Half day',
+                  'Let AI craft the perfect Nashik day for you',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppTheme.onSurfaceVariant,
+                    color: Colors.white70,
                   ),
                 ),
+
+                const SizedBox(height: 32),
+
+                // Current location
+                Text(AppStrings.currentLocation, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
+                const SizedBox(height: 12),
+                TextField(
+                  style: const TextStyle(color: Colors.white),
+                  controller: TextEditingController(text: 'Nashik City Center'),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.my_location_rounded, color: AppTheme.secondary, size: 20),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+
+                // Time preference
+                Text(AppStrings.timePref, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${_hours.toInt()} hours',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.secondary,
+                      ),
+                    ),
+                    Text(
+                      'Half day',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    activeTrackColor: AppTheme.secondary,
+                    inactiveTrackColor: Colors.white.withValues(alpha: 0.2),
+                    thumbColor: AppTheme.secondary,
+                    overlayColor: AppTheme.secondaryContainer.withValues(alpha: 0.2),
+                    trackHeight: 4,
+                  ),
+                  child: Slider(
+                    value: _hours,
+                    min: 1,
+                    max: 12,
+                    divisions: 11,
+                    onChanged: (v) => setState(() => _hours = v),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Budget
+                Text(AppStrings.budget, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '₹${_budget.toInt()}',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.secondary,
+                      ),
+                    ),
+                    Text(
+                      _budget <= 500 ? 'Budget' : _budget <= 2000 ? 'Mid-range' : 'Luxury',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    activeTrackColor: AppTheme.secondary,
+                    inactiveTrackColor: Colors.white.withValues(alpha: 0.2),
+                    thumbColor: AppTheme.secondary,
+                    overlayColor: AppTheme.secondaryContainer.withValues(alpha: 0.2),
+                    trackHeight: 4,
+                  ),
+                  child: Slider(
+                    value: _budget,
+                    min: 100,
+                    max: 5000,
+                    divisions: 49,
+                    onChanged: (v) => setState(() => _budget = v),
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+
+                // Preferences
+                Text(AppStrings.preferences, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
+                const SizedBox(height: 16),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: _preferences.map((pref) => CategoryChip(
+                    label: pref['label'] as String,
+                    icon: pref['icon'] as IconData,
+                    isSelected: _selectedPrefs.contains(pref['label']),
+                    onTap: () => setState(() {
+                      final label = pref['label'] as String;
+                      if (_selectedPrefs.contains(label)) {
+                        _selectedPrefs.remove(label);
+                      } else {
+                        _selectedPrefs.add(label);
+                      }
+                    }),
+                  )).toList(),
+                ),
+
+                const SizedBox(height: 40),
+
+                // Generate
+                GradientButton(
+                  label: AppStrings.generatePlan,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/plan-results');
+                  },
+                ),
+
+                const SizedBox(height: 40),
               ],
             ),
-            SliderTheme(
-              data: SliderThemeData(
-                activeTrackColor: AppTheme.primary,
-                inactiveTrackColor: AppTheme.surfaceContainerHighest,
-                thumbColor: AppTheme.primary,
-                overlayColor: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
-                trackHeight: 4,
-              ),
-              child: Slider(
-                value: _hours,
-                min: 1,
-                max: 12,
-                divisions: 11,
-                onChanged: (v) => setState(() => _hours = v),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Budget
-            Text(AppStrings.budget, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '₹${_budget.toInt()}',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.primary,
-                  ),
-                ),
-                Text(
-                  _budget <= 500 ? 'Budget' : _budget <= 2000 ? 'Mid-range' : 'Luxury',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppTheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-            SliderTheme(
-              data: SliderThemeData(
-                activeTrackColor: AppTheme.secondary,
-                inactiveTrackColor: AppTheme.surfaceContainerHighest,
-                thumbColor: AppTheme.secondary,
-                overlayColor: AppTheme.secondaryContainer.withValues(alpha: 0.2),
-                trackHeight: 4,
-              ),
-              child: Slider(
-                value: _budget,
-                min: 100,
-                max: 5000,
-                divisions: 49,
-                onChanged: (v) => setState(() => _budget = v),
-              ),
-            ),
-
-            const SizedBox(height: 28),
-
-            // Preferences
-            Text(AppStrings.preferences, style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: _preferences.map((pref) => CategoryChip(
-                label: pref['label'] as String,
-                icon: pref['icon'] as IconData,
-                isSelected: _selectedPrefs.contains(pref['label']),
-                onTap: () => setState(() {
-                  final label = pref['label'] as String;
-                  if (_selectedPrefs.contains(label)) {
-                    _selectedPrefs.remove(label);
-                  } else {
-                    _selectedPrefs.add(label);
-                  }
-                }),
-              )).toList(),
-            ),
-
-            const SizedBox(height: 40),
-
-            // Generate
-            GradientButton(
-              label: AppStrings.generatePlan,
-              onPressed: () {
-                Navigator.pushNamed(context, '/plan-results');
-              },
-            ),
-
-            const SizedBox(height: 40),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

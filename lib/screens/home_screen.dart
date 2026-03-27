@@ -73,6 +73,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Cinematic Background
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Background for app.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 100),
@@ -91,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               AppStrings.exploreNashik,
                               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: AppTheme.primary,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -99,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               AppStrings.tagline,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppTheme.onSurfaceVariant,
+                                color: Colors.white70,
                               ),
                             ),
                           ],
@@ -110,10 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 44,
                             height: 44,
                             decoration: BoxDecoration(
-                              color: AppTheme.surfaceContainerLow,
+                              color: Colors.white.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.notifications_outlined, color: AppTheme.onSurfaceVariant),
+                            child: const Icon(Icons.notifications_outlined, color: Colors.white),
                           ),
                         ),
                       ],
@@ -316,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           // Glassmorphism bottom nav
-            GlassmorphismNav(
+          GlassmorphismNav(
             currentIndex: _navIndex,
             onTap: (i) {
               setState(() => _navIndex = i);

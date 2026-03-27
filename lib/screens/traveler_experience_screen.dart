@@ -45,49 +45,64 @@ class TravelerExperienceScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-
-            Text(
-              'Stories from fellow travelers',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/stories_trimbakeshwar.jpg',
+              fit: BoxFit.cover,
             ),
-
-            const SizedBox(height: 24),
-
-            // Filter row
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _FilterChip(label: 'Recent', selected: true),
-                  const SizedBox(width: 8),
-                  _FilterChip(label: 'Popular', selected: false),
-                  const SizedBox(width: 8),
-                  _FilterChip(label: '📷 Photos', selected: false),
-                  const SizedBox(width: 8),
-                  _FilterChip(label: '🎥 Videos', selected: false),
-                ],
-              ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
             ),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
 
-            const SizedBox(height: 24),
+                Text(
+                  'Stories from fellow travelers',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white70,
+                  ),
+                ),
 
-            // Traveler posts
-            ...MockData.travelerPosts.map((post) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _TravelerPost(post: post),
-            )),
+                const SizedBox(height: 24),
 
-            const SizedBox(height: 80), // FAB clearance
-          ],
-        ),
+                // Filter row
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _FilterChip(label: 'Recent', selected: true),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: 'Popular', selected: false),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: '📷 Photos', selected: false),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: '🎥 Videos', selected: false),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Traveler posts
+                ...MockData.travelerPosts.map((post) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: _TravelerPost(post: post),
+                )),
+
+                const SizedBox(height: 80), // FAB clearance
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
