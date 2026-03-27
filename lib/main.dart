@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'utils/theme.dart';
 import 'screens/welcome_screen.dart';
@@ -20,40 +19,26 @@ import 'screens/events_screen.dart';
 import 'screens/festivals_screen.dart';
 import 'screens/ar_view_screen.dart';
 import 'screens/map_screen.dart';
-
-final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+import 'screens/sos_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   
-  final prefs = await SharedPreferences.getInstance();
-  final bool hasProfile = prefs.getBool('hasProfile') ?? false;
-  final String startRoute = hasProfile ? '/home' : '/';
-
-  runApp(GramYatraApp(initialRoute: startRoute));
+  runApp(const GramYatraApp());
 }
 
 class GramYatraApp extends StatelessWidget {
-  final String initialRoute;
-  const GramYatraApp({super.key, required this.initialRoute});
+  const GramYatraApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
-      valueListenable: themeNotifier,
-      builder: (context, ThemeMode currentMode, child) {
-        return MaterialApp(
-          title: 'Gram Yatra',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.theme,
-          darkTheme: ThemeData(
-            useMaterial3: true,
-            brightness: Brightness.dark,
-            colorSchemeSeed: AppTheme.primary,
-          ),
-          themeMode: currentMode,
-          initialRoute: initialRoute,
+    return MaterialApp(
+      title: 'Gram Yatra',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.theme,
+      themeMode: ThemeMode.light,
+      initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
         '/profile-setup': (context) => const ProfileSetupScreen(),
@@ -72,8 +57,7 @@ class GramYatraApp extends StatelessWidget {
         '/festivals': (context) => const FestivalsScreen(),
         '/ar-view': (context) => const ARViewScreen(),
         '/map': (context) => const MapScreen(),
-      },
-        );
+        '/sos': (context) => const SosScreen(),
       },
     );
   }

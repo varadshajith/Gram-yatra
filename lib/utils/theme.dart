@@ -5,35 +5,36 @@ import 'package:google_fonts/google_fonts.dart';
 /// Burgundy for heritage, Saffron for the divine, Earthy Green for the landscape.
 class AppTheme {
   // ─── Primary Colors ───
-  static const Color primary = Color(0xFF4E021E);
-  static const Color primaryContainer = Color(0xFF6B1A33);
+  static const Color primary = Color(0xFF7B2D8B);
+  static const Color primaryContainer = Color(0xFF9E4DB0);
   static const Color onPrimary = Color(0xFFFFFFFF);
-  static const Color onPrimaryContainer = Color(0xFFEE829B);
+  static const Color onPrimaryContainer = Color(0xFFFFFFFF);
 
-  // ─── Secondary (Saffron) ───
-  static const Color secondary = Color(0xFF9D4400);
-  static const Color secondaryContainer = Color(0xFFFE7F2F);
+  // ─── Secondary ───
+  static const Color secondary = Color(0xFF1A0A2E);
+  static const Color secondaryContainer = Color(0xFF2A1A4E);
   static const Color onSecondary = Color(0xFFFFFFFF);
 
-  // ─── Tertiary (Earthy Green) ───
-  static const Color tertiary = Color(0xFF002B0E);
-  static const Color tertiaryContainer = Color(0xFF00431A);
+  // ─── Tertiary ───
+  static const Color tertiary = Color(0xFF1A0A2E);
+  static const Color tertiaryContainer = Color(0xFF2A1A4E);
   static const Color onTertiary = Color(0xFFFFFFFF);
 
   // ─── Surfaces (No-Line Rule: boundaries via tonal shifts) ───
-  static const Color surface = Color(0xFFFAF9F9);
+  // ─── Surfaces ───
+  static const Color surface = Color(0xFFF2E8D5);
   static const Color surfaceContainerLowest = Color(0xFFFFFFFF);
-  static const Color surfaceContainerLow = Color(0xFFF5F3F3);
-  static const Color surfaceContainer = Color(0xFFEFEDED);
-  static const Color surfaceContainerHigh = Color(0xFFE9E8E8);
-  static const Color surfaceContainerHighest = Color(0xFFE3E2E2);
-  static const Color surfaceDim = Color(0xFFDBDAD9);
+  static const Color surfaceContainerLow = Color(0xFFF9F4EC);
+  static const Color surfaceContainer = Color(0xFFEBE0CA);
+  static const Color surfaceContainerHigh = Color(0xFFE3D6BC);
+  static const Color surfaceContainerHighest = Color(0xFFDCD2C0);
+  static const Color surfaceDim = Color(0xFFD4C8B4);
 
   // ─── On-Surface ───
-  static const Color onSurface = Color(0xFF1B1C1C);
-  static const Color onSurfaceVariant = Color(0xFF544245);
-  static const Color outline = Color(0xFF877275);
-  static const Color outlineVariant = Color(0xFFDAC0C4);
+  static const Color onSurface = Color(0xFF0A1128);
+  static const Color onSurfaceVariant = Color(0xFF1B253D);
+  static const Color outline = Color(0xFF8B93A5);
+  static const Color outlineVariant = Color(0xFFC4C9D5);
 
   // ─── Fixed & Accents ───
   static const Color primaryFixed = Color(0xFFFFD9DF);

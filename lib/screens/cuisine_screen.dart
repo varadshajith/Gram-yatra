@@ -123,7 +123,7 @@ class _CuisineScreenState extends State<CuisineScreen> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF9D4400), Color(0xFFFE7F2F)],
+                  colors: [AppTheme.secondary, AppTheme.secondaryContainer],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -151,14 +151,21 @@ class _CuisineScreenState extends State<CuisineScreen> {
                             width: 32,
                             height: 32,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) => const Icon(Icons.fastfood, color: Colors.white, size: 32),
+                            errorBuilder: (context, error, stackTrace) => Container(
+                              width: 32,
+                              height: 32,
+                              color: const Color(0xFF7B2D8B),
+                            ),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        Text(
-                          '${food['name']}  ⭐ ${food['rating']}',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
+                        Expanded(
+                          child: Text(
+                            '${food['name']}  ⭐ ${food['rating']}',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.9),
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],

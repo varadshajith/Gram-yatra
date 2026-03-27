@@ -39,6 +39,7 @@ class FestivalsScreen extends StatelessWidget {
             // Hero banner
             Container(
               width: double.infinity,
+              height: 240,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppTheme.radiusMd),
               ),
@@ -50,7 +51,7 @@ class FestivalsScreen extends StatelessWidget {
                    Container(
                      decoration: BoxDecoration(
                        gradient: LinearGradient(
-                         colors: [Color(0xFF4E021E).withValues(alpha: 0.7), Color(0xFF6B1A33).withValues(alpha: 0.7)],
+                         colors: [AppTheme.primary.withValues(alpha: 0.7), AppTheme.primaryContainer.withValues(alpha: 0.7)],
                          begin: Alignment.topLeft,
                          end: Alignment.bottomRight,
                        ),
