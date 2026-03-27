@@ -13,6 +13,7 @@ class FestivalsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(AppStrings.festivalsTitle),
         leading: IconButton(
@@ -21,11 +22,13 @@ class FestivalsScreen extends StatelessWidget {
         ),
       ),
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Positioned.fill(
             child: Image.asset(
               'assets/images/Rangapanchami.jpeg',
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(color: const Color(0xFF1A0A2E)),
             ),
           ),
           Positioned.fill(
@@ -33,89 +36,91 @@ class FestivalsScreen extends StatelessWidget {
               color: Colors.black.withValues(alpha: 0.55),
             ),
           ),
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
+          Positioned.fill(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
 
-                Text(
-                  'Nashik celebrates with unmatched energy and devotion',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
+                  Text(
+                    'Nashik celebrates with unmatched energy and devotion',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.9),
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
-                // Hero banner
-                Container(
-                  width: double.infinity,
-                  height: 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                       const AppImage('assets/images/Kumbhamela.jpeg'),
-                       Container(
-                         decoration: BoxDecoration(
-                           gradient: LinearGradient(
-                             colors: [AppTheme.primary.withValues(alpha: 0.7), AppTheme.primaryContainer.withValues(alpha: 0.7)],
-                             begin: Alignment.topLeft,
-                             end: Alignment.bottomRight,
+                  // Hero banner
+                  Container(
+                    width: double.infinity,
+                    height: 240,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                         const AppImage('assets/images/Kumbhamela.jpeg'),
+                         Container(
+                           decoration: BoxDecoration(
+                             gradient: LinearGradient(
+                               colors: [AppTheme.primary.withValues(alpha: 0.7), AppTheme.primaryContainer.withValues(alpha: 0.7)],
+                               begin: Alignment.topLeft,
+                               end: Alignment.bottomRight,
+                             ),
                            ),
                          ),
-                       ),
-                       Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('🎉', style: TextStyle(fontSize: 40)),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Festival Capital\nof Maharashtra',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                height: 1.2,
+                         Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('🎉', style: TextStyle(fontSize: 40)),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Festival Capital\nof Maharashtra',
+                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'From Kumbh Mela to Rang Panchami, experience festivals like nowhere else.',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppTheme.primaryFixedDim.withValues(alpha: 0.9),
+                              const SizedBox(height: 8),
+                              Text(
+                                'From Kumbh Mela to Rang Panchami, experience festivals like nowhere else.',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white.withValues(alpha: 0.9),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 28),
+                  const SizedBox(height: 28),
 
-                const SectionHeader(title: 'Major Festivals'),
+                  const SectionHeader(title: 'Major Festivals'),
 
-                ...MockData.festivals.map((fest) => Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: EventCard(
-                    icon: fest['icon']!,
-                    name: fest['name']!,
-                    timeOrDate: fest['date']!,
-                    description: fest['desc']!,
-                    highlight: fest['highlight'],
-                  ),
-                )),
+                  ...MockData.festivals.map((fest) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: EventCard(
+                      icon: fest['icon']!,
+                      name: fest['name']!,
+                      timeOrDate: fest['date']!,
+                      description: fest['desc']!,
+                      highlight: fest['highlight'],
+                    ),
+                  )),
 
-                const SizedBox(height: 24),
-              ],
+                  const SizedBox(height: 100),
+                ],
+              ),
             ),
           ),
         ],

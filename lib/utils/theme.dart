@@ -11,7 +11,7 @@ class AppTheme {
   static const Color onPrimaryContainer = Color(0xFFFFFFFF);
 
   // ─── Secondary ───
-  static const Color secondary = Color(0xFF1A0A2E);
+  static const Color secondary = Color(0xFFF5A623);
   static const Color secondaryContainer = Color(0xFF2A1A4E);
   static const Color onSecondary = Color(0xFFFFFFFF);
 
@@ -149,16 +149,51 @@ class AppTheme {
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primary,
-          foregroundColor: onPrimary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusFull),
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(primary),
+          foregroundColor: WidgetStateProperty.all(onPrimary),
+          elevation: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) return 12;
+            return 0;
+          }),
+          shadowColor: WidgetStateProperty.all(primary.withValues(alpha: 0.4)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          elevation: 0,
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          ),
         ),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) return onPrimary;
+            return primary;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) return primary;
+            return Colors.transparent;
+          }),
+          side: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) return BorderSide.none;
+            return const BorderSide(color: primary);
+          }),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+          padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 32, vertical: 16)),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        ),
+      ),
+      splashColor: primary.withValues(alpha: 0.2),
+      highlightColor: primary.withValues(alpha: 0.2),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surfaceContainerLow,

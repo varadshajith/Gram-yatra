@@ -46,7 +46,7 @@ class _BusinessCategoryScreenState extends State<BusinessCategoryScreen> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/Manufacturing.jpeg',
+              _fallbackImage(category),
               fit: BoxFit.cover,
             ),
           ),

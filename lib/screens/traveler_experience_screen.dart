@@ -68,7 +68,7 @@ class TravelerExperienceScreen extends StatelessWidget {
                 Text(
                   'Stories from fellow travelers',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
                 ),
 
@@ -126,7 +126,7 @@ class _FilterChip extends StatelessWidget {
         label,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontSize: 12,
-          color: selected ? AppTheme.primary : AppTheme.onSurfaceVariant,
+          color: selected ? AppTheme.primary : const Color(0xFF7B2D8B),
           fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
         ),
       ),
@@ -173,13 +173,14 @@ class _TravelerPost extends StatelessWidget {
                       post['user']!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
+                        color: const Color(0xFF1A0A2E),
                       ),
                     ),
                     Text(
                       post['time']!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 12,
-                        color: AppTheme.onSurfaceVariant,
+                        color: const Color(0xFF7B2D8B),
                       ),
                     ),
                   ],
@@ -241,6 +242,7 @@ class _TravelerPost extends StatelessWidget {
             post['caption']!,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               height: 1.5,
+              color: const Color(0xFF1A0A2E),
             ),
           ),
 
@@ -255,7 +257,7 @@ class _TravelerPost extends StatelessWidget {
                 '${post['likes']} likes',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 13,
-                  color: AppTheme.onSurfaceVariant,
+                  color: const Color(0xFF7B2D8B),
                 ),
               ),
               const Spacer(),

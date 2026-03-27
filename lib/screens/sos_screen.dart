@@ -35,41 +35,45 @@ class SosScreen extends StatelessWidget {
               color: Colors.black.withValues(alpha: 0.55),
             ),
           ),
-          ListView.separated(
-            padding: const EdgeInsets.all(24),
-            itemCount: helplines.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 16),
-            itemBuilder: (context, index) {
-              final h = helplines[index];
-              return Card(
-                color: AppTheme.surfaceContainerLowest.withValues(alpha: 0.9),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  leading: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
+          Positioned.fill(
+            child: ListView.separated(
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 100),
+              itemCount: helplines.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemBuilder: (context, index) {
+                final h = helplines[index];
+                return Card(
+                  color: AppTheme.surfaceContainerLowest.withValues(alpha: 0.9),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    leading: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(h['icon'] as IconData, color: Colors.red),
                     ),
-                    child: Icon(h['icon'] as IconData, color: Colors.red),
-                  ),
-                  title: Text(
-                    h['name'] as String,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  subtitle: Text(
-                    h['number'] as String,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                    title: Text(
+                      h['name'] as String,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: const Color(0xFF1A0A2E),
+                      ),
                     ),
+                    subtitle: Text(
+                      h['number'] as String,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: AppTheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.call, color: AppTheme.primary),
+                    onTap: () {},
                   ),
-                  trailing: const Icon(Icons.call, color: AppTheme.primary),
-                  onTap: () {},
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ],
       ),

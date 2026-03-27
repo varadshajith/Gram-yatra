@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../widgets/app_image.dart';
+import 'scale_tap.dart';
 
 /// Reusable card for places, cuisines, businesses.
 class PlaceCard extends StatelessWidget {
@@ -25,14 +26,21 @@ class PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ScaleTap(
       onTap: onTap,
+      pressedScale: 0.97,
       child: Container(
         padding: const EdgeInsets.all(AppTheme.spacingSmall),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceContainerLowest,
-          borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-          boxShadow: AppTheme.ambientShadow,
+          color: const Color(0xFFF2E8D5),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.12),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Row(
           children: [
@@ -57,13 +65,14 @@ class PlaceCard extends StatelessWidget {
                     name,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontSize: 16,
+                      color: const Color(0xFF1A0A2E),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.onSurfaceVariant,
+                      color: const Color(0xFF7B2D8B),
                       fontSize: 12,
                     ),
                     maxLines: 1,
@@ -89,7 +98,7 @@ class PlaceCard extends StatelessWidget {
                             trailing!,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontSize: 12,
-                              color: AppTheme.onSurfaceVariant,
+                              color: const Color(0xFF7B2D8B),
                             ),
                           ),
                         ],

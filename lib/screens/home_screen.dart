@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               AppStrings.tagline,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white70,
+                                color: Colors.white.withValues(alpha: 0.9),
                               ),
                             ),
                           ],
