@@ -9,8 +9,19 @@ class PlanResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: wire to real Gemini API via Firebase Functions
-    final plans = MockData.fallbackPlans;
+    final aiPlanString = ModalRoute.of(context)?.settings.arguments as String?;
+    
+    // Wire to real Gemini API via Firebase Functions
+    final plans = aiPlanString != null 
+      ? [{
+          'name': 'AI Custom Itinerary',
+          'tagline': 'Crafted specifically to your preferences',
+          'stops': [aiPlanString], // Loading the huge string purely into stops
+          'estimatedCost': 'Custom',
+          'highlights': 'Powered by Gemini',
+          'duration': 'Custom'
+        }]
+      : MockData.fallbackPlans;
 
     return Scaffold(
       appBar: AppBar(

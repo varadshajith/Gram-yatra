@@ -20,6 +20,7 @@ import 'screens/festivals_screen.dart';
 import 'screens/ar_view_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/sos_screen.dart';
+import 'screens/kumbh_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +59,7 @@ class GramYatraApp extends StatelessWidget {
         '/ar-view': (context) => const ARViewScreen(),
         '/map': (context) => const MapScreen(),
         '/sos': (context) => const SosScreen(),
+        '/kumbh': (context) => const KumbhScreen(),
       },
     );
   }

@@ -1,8 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../utils/theme.dart';
 
 class SosScreen extends StatelessWidget {
   const SosScreen({super.key});
+
+  Future<void> _confirmAndLaunch(BuildContext context, String title, String content, String urlStr) async {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primary, foregroundColor: Colors.white),
+            onPressed: () async {
+              Navigator.pop(ctx);
+              final url = Uri.parse(urlStr);
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              }
+            },
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +49,18 @@ class SosScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.message, color: Colors.green),
+            tooltip: 'WhatsApp Police Platform',
+            onPressed: () => _confirmAndLaunch(
+              context,
+              'Open WhatsApp',
+              'This will open a direct chat with the Nashik Police Helpline (1091).',
+              'https://wa.me/911091',
+            ),
+          ),
+        ],
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(24),
@@ -57,6 +97,17 @@ class SosScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.red.shade700,
+        icon: const Icon(Icons.emergency, color: Colors.white),
+        label: const Text('SOS 112', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+        onPressed: () => _confirmAndLaunch(
+          context,
+          'Emergency Protocol',
+          'Are you sure you want to dial emergency services (112)?',
+          'tel:112',
+        ),
       ),
     );
   }
