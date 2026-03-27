@@ -7,6 +7,7 @@ import '../widgets/section_header.dart';
 import '../widgets/place_card.dart';
 import '../widgets/event_card.dart';
 import '../widgets/glassmorphism_nav.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Screen 4: Main Explore Nashik Home Hub
 class HomeScreen extends StatefulWidget {
@@ -18,6 +19,54 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _navIndex = 0;
+  List<Map<String, String>> _bookmarkedPlaces = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPlaces();
+  }
+
+  Future<void> _loadSavedPlaces() async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getStringList('savedPlaces') ?? [];
+    
+    final matches = <Map<String, String>>[];
+    for (var name in saved) {
+      final attraction = MockData.topAttractions.where((p) => p['name'] == name).firstOrNull;
+      if (attraction != null) { matches.add(attraction); continue; }
+      
+      final cuisine = MockData.topCuisine.where((p) => p['name'] == name).firstOrNull;
+      if (cuisine != null) {
+         matches.add({
+           'name': cuisine['name']!,
+           'description': cuisine['type']!,
+           'image': cuisine['icon']!,
+           'rating': cuisine['rating']!,
+           'category': 'food',
+         });
+         continue; 
+      }
+      
+      for (var list in MockData.businesses.values) {
+        final biz = list.where((b) => b['name'] == name).firstOrNull;
+        if (biz != null) {
+           matches.add({
+             'name': biz['name']!,
+             'description': biz['desc']!,
+             'image': biz['image'] ?? 'assets/images/tourisms.jpeg',
+             'rating': biz['rating']!,
+             'category': 'business',
+           });
+           break;
+        }
+      }
+    }
+    
+    setState(() {
+      _bookmarkedPlaces = matches;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +153,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   const SizedBox(height: 32),
+
+                  // Saved Places 
+                  if (_bookmarkedPlaces.isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: SectionHeader(
+                        title: 'Saved Places',
+                        onViewAll: () => Navigator.pushNamed(context, '/user-profile'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 156,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        itemCount: _bookmarkedPlaces.length,
+                        separatorBuilder: (context, index) => const SizedBox(width: 12),
+                        itemBuilder: (context, i) {
+                          final place = _bookmarkedPlaces[i];
+                          return SizedBox(
+                            width: 260,
+                            child: PlaceCard(
+                              emoji: place['image']!,
+                              name: place['name']!,
+                              description: place['description']!,
+                              rating: place['rating'],
+                              onTap: () => Navigator.pushNamed(context, '/place-detail', arguments: place),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                  ],
 
                   // Top Attractions preview
                   Padding(
@@ -233,22 +316,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           // Glassmorphism bottom nav
-          GlassmorphismNav(
+            GlassmorphismNav(
             currentIndex: _navIndex,
             onTap: (i) {
               setState(() => _navIndex = i);
               switch (i) {
                 case 1:
-                  Navigator.pushNamed(context, '/top-attractions');
+                  Navigator.pushNamed(context, '/map');
                   break;
                 case 2:
                   Navigator.pushNamed(context, '/plan-builder');
                   break;
                 case 3:
-                  Navigator.pushNamed(context, '/events');
+                  Navigator.pushNamed(context, '/festivals');
                   break;
                 case 4:
-                  // TODO: wire to profile
+                  Navigator.pushNamed(context, '/user-profile');
                   break;
               }
             },

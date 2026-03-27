@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/theme.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/app_image.dart';
@@ -142,18 +143,61 @@ class PlaceDetailScreen extends StatelessWidget {
 
                   const SizedBox(height: 32),
 
-                  // CTA
-                  GradientButton(
-                    label: 'Add to My Plan',
-                    icon: Icons.add_rounded,
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('$name added to your plan!'),
-                          backgroundColor: AppTheme.primary,
+                  // CTAs
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GradientButton(
+                          label: 'Add to My Plan',
+                          icon: Icons.add_rounded,
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            final saved = prefs.getStringList('savedPlaces') ?? [];
+                            if (!saved.contains(name)) {
+                              saved.add(name);
+                              await prefs.setStringList('savedPlaces', saved);
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('$name added to your plan!'),
+                                    backgroundColor: AppTheme.primary,
+                                  ),
+                                );
+                              }
+                            } else {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('$name is already in your plan.')),
+                                );
+                              }
+                            }
+                          },
                         ),
-                      );
-                    },
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.view_in_ar_rounded, color: AppTheme.primary),
+                          label: Text(
+                            'AR/VR View',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppTheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            side: const BorderSide(color: AppTheme.primary),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/ar-view', arguments: name);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 32),

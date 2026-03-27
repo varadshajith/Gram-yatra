@@ -95,57 +95,48 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                 children: [
                   const Spacer(flex: 2),
 
-                  FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Column(
-                      children: [
-                        // Landmark emojis
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            _LandmarkIcon(emoji: '🛕', delay: 0),
-                            SizedBox(width: 20),
-                            _LandmarkIcon(emoji: '🍇', delay: 100),
-                            SizedBox(width: 20),
-                            _LandmarkIcon(emoji: '⛰️', delay: 200),
-                          ],
-                        ),
+                  SlideTransition(
+                    position: _slideAnimation,
+                    child: FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 48),
 
-                        const SizedBox(height: 48),
-
-                        // App name
-                        Text(
-                          AppStrings.appName,
-                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: Colors.white,
-                            fontSize: 48,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -1,
+                          // App name
+                          Text(
+                            AppStrings.appName,
+                            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                              color: Colors.white,
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: -1,
+                            ),
                           ),
-                        ),
 
-                        const SizedBox(height: 12),
+                          const SizedBox(height: 12),
 
-                        // Tagline
-                        Text(
-                          AppStrings.tagline,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppTheme.primaryFixedDim,
-                            fontSize: 18,
+                          // Tagline
+                          Text(
+                            AppStrings.tagline,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: AppTheme.primaryFixedDim,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
 
-                        const SizedBox(height: 8),
+                          const SizedBox(height: 8),
 
-                        Text(
-                          AppStrings.taglineSub,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.primaryFixedDim.withValues(alpha: 0.7),
+                          Text(
+                            AppStrings.taglineSub,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppTheme.primaryFixedDim.withValues(alpha: 0.7),
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
@@ -160,7 +151,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                         label: AppStrings.beginJourney,
                         icon: Icons.arrow_forward_rounded,
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(context, '/profile-setup');
                         },
                       ),
                     ),
@@ -177,27 +168,3 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
   }
 }
 
-class _LandmarkIcon extends StatelessWidget {
-  final String emoji;
-  final int delay;
-
-  const _LandmarkIcon({required this.emoji, required this.delay});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 72,
-      height: 72,
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.1),
-        ),
-      ),
-      child: Center(
-        child: Text(emoji, style: const TextStyle(fontSize: 36)),
-      ),
-    );
-  }
-}

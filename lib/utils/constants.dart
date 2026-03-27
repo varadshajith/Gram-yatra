@@ -42,11 +42,11 @@ class MockData {
 
   // ─── Top 5 Cuisine ───
   static const List<Map<String, String>> topCuisine = [
-    {'name': 'Sadhana Misal', 'type': 'Misal', 'rating': '4.9', 'icon': 'assets/images/Misal.jpeg'},
-    {'name': 'Samarth Juice', 'type': 'Drinks', 'rating': '4.7', 'icon': 'assets/images/Samarthajuice.jpeg'},
-    {'name': 'Buda Halwai', 'type': 'Sweets', 'rating': '4.8', 'icon': 'assets/images/Budhahalwai.jpeg'},
-    {'name': 'Sainzara Vadaj', 'type': 'Snacks', 'rating': '4.6', 'icon': 'assets/images/Misal.jpeg'},
-    {'name': 'Jotka Misal', 'type': 'Misal', 'rating': '4.8', 'icon': 'assets/images/Misal.jpeg'},
+    {'name': 'Sadhana Misal', 'type': 'Misal', 'rating': '4.9', 'icon': 'assets/images/Misal.jpeg', 'lat': '19.9975', 'lng': '73.7898'},
+    {'name': 'Samarth Juice', 'type': 'Drinks', 'rating': '4.7', 'icon': 'assets/images/Samarthajuice.jpeg', 'lat': '20.0055', 'lng': '73.7912'},
+    {'name': 'Buda Halwai', 'type': 'Sweets', 'rating': '4.8', 'icon': 'assets/images/Budhahalwai.jpeg', 'lat': '19.9982', 'lng': '73.7856'},
+    {'name': 'Sainzara Vadaj', 'type': 'Snacks', 'rating': '4.6', 'icon': 'assets/images/Misal.jpeg', 'lat': '19.9991', 'lng': '73.7820'},
+    {'name': 'Jotka Misal', 'type': 'Misal', 'rating': '4.8', 'icon': 'assets/images/Misal.jpeg', 'lat': '20.0023', 'lng': '73.7885'},
   ];
 
   static const List<String> cuisineCategories = ['All', 'Misal', 'Sweets', 'Drinks', 'Snacks'];
@@ -63,29 +63,29 @@ class MockData {
   // Businesses by category
   static const Map<String, List<Map<String, String>>> businesses = {
     'Agriculture': [
-      {'name': 'Sahyadri Farms', 'desc': 'Largest grape exporter in India', 'rating': '4.8'},
-      {'name': 'Boras Agro', 'desc': 'Organic farming solutions', 'rating': '4.5'},
-      {'name': 'Nashik Grape Valley', 'desc': 'Premium grape cultivation', 'rating': '4.6'},
+      {'name': 'Sahyadri Farms', 'desc': 'Largest grape exporter in India', 'rating': '4.8', 'image': 'assets/images/Sahyadrifarms.jpeg'},
+      {'name': 'Boras Agro', 'desc': 'Organic farming solutions', 'rating': '4.5', 'image': 'assets/images/Agriculture.jpeg'},
+      {'name': 'Nashik Grape Valley', 'desc': 'Premium grape cultivation', 'rating': '4.6', 'image': 'assets/images/Agriculture.jpeg'},
     ],
     'Manufacturing': [
-      {'name': 'HAL Nashik', 'desc': 'Hindustan Aeronautics Division', 'rating': '4.9'},
-      {'name': 'India Security Press', 'desc': 'Currency & stamp printing', 'rating': '4.7'},
-      {'name': 'Mahindra Nashik Plant', 'desc': 'Vehicle manufacturing', 'rating': '4.5'},
+      {'name': 'HAL Nashik', 'desc': 'Hindustan Aeronautics Division', 'rating': '4.9', 'image': 'assets/images/taparia.jpeg'},
+      {'name': 'India Security Press', 'desc': 'Currency & stamp printing', 'rating': '4.7', 'image': 'assets/images/taparia.jpeg'},
+      {'name': 'Mahindra Nashik Plant', 'desc': 'Vehicle manufacturing', 'rating': '4.5', 'image': 'assets/images/taparia.jpeg'},
     ],
     'Tourism Services': [
-      {'name': 'Nashik Heritage Walks', 'desc': 'Guided cultural tours', 'rating': '4.8'},
-      {'name': 'Godavari Boat Rides', 'desc': 'Scenic river experience', 'rating': '4.6'},
-      {'name': 'Wine Tour Nashik', 'desc': 'Curated vineyard experiences', 'rating': '4.7'},
+      {'name': 'Nashik Heritage Walks', 'desc': 'Guided cultural tours', 'rating': '4.8', 'image': 'assets/images/tourisms.jpeg'},
+      {'name': 'Godavari Boat Rides', 'desc': 'Scenic river experience', 'rating': '4.6', 'image': 'assets/images/PanchavatiRamkund.jpeg'},
+      {'name': 'Wine Tour Nashik', 'desc': 'Curated vineyard experiences', 'rating': '4.7', 'image': 'assets/images/Sulawines.jpeg'},
     ],
     'Traditional Fashion': [
-      {'name': 'Paithani Saree Center', 'desc': 'Authentic Paithani weaves', 'rating': '4.9'},
-      {'name': 'Nashik Kolhapuri House', 'desc': 'Handmade leather chappals', 'rating': '4.5'},
-      {'name': 'Yeola Paithani Hub', 'desc': 'Traditional silk sarees', 'rating': '4.8'},
+      {'name': 'Paithani Saree Center', 'desc': 'Authentic Paithani weaves', 'rating': '4.9', 'image': 'assets/images/traditionalfashion.jpeg'},
+      {'name': 'Nashik Kolhapuri House', 'desc': 'Handmade leather chappals', 'rating': '4.5', 'image': 'assets/images/traditionalfashion.jpeg'},
+      {'name': 'Yeola Paithani Hub', 'desc': 'Traditional silk sarees', 'rating': '4.8', 'image': 'assets/images/traditionalfashion.jpeg'},
     ],
     'Architecture': [
-      {'name': 'Pandavleni Caves', 'desc': '2000-year-old Buddhist rock-cut caves', 'rating': '4.7'},
-      {'name': 'Coin Museum Nashik', 'desc': 'Historic numismatic collection', 'rating': '4.4'},
-      {'name': 'Kalaram Temple Complex', 'desc': 'Black stone Ram temple, 18th century', 'rating': '4.8'},
+      {'name': 'Pandavleni Caves', 'desc': '2000-year-old Buddhist rock-cut caves', 'rating': '4.7', 'image': 'assets/images/arhitecture.jpeg'},
+      {'name': 'Coin Museum Nashik', 'desc': 'Historic numismatic collection', 'rating': '4.4', 'image': 'assets/images/arhitecture.jpeg'},
+      {'name': 'Kalaram Temple Complex', 'desc': 'Black stone Ram temple, 18th century', 'rating': '4.8', 'image': 'assets/images/arhitecture.jpeg'},
     ],
   };
 

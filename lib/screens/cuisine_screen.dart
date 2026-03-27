@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../utils/constants.dart';
@@ -16,10 +18,74 @@ class CuisineScreen extends StatefulWidget {
 
 class _CuisineScreenState extends State<CuisineScreen> {
   String _selectedCategory = 'All';
+  Position? _currentPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return;
+    }
+
+    if (permission == LocationPermission.deniedForever) return;
+
+    try {
+      Position position = await Geolocator.getCurrentPosition();
+      if (mounted) {
+        setState(() {
+          _currentPosition = position;
+        });
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
 
   List<Map<String, String>> get _filteredCuisine {
     if (_selectedCategory == 'All') return MockData.topCuisine;
     return MockData.topCuisine.where((c) => c['type'] == _selectedCategory).toList();
+  }
+
+  String _getDistance(Map<String, String> food) {
+    if (_currentPosition == null || !food.containsKey('lat') || !food.containsKey('lng')) return '';
+    final lat = double.tryParse(food['lat']!) ?? 0;
+    final lng = double.tryParse(food['lng']!) ?? 0;
+    if (lat == 0 || lng == 0) return '';
+    final distanceInMeters = Geolocator.distanceBetween(
+      _currentPosition!.latitude, _currentPosition!.longitude, lat, lng);
+    return '${(distanceInMeters / 1000).toStringAsFixed(1)} km';
+  }
+
+  Future<void> _saveToPlan(Map<String, String> food) async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getStringList('savedPlaces') ?? [];
+    if (!saved.contains(food['name'])) {
+      saved.add(food['name']!);
+      await prefs.setStringList('savedPlaces', saved);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${food['name']} saved!')),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${food['name']} is already saved.')),
+        );
+      }
+    }
   }
 
   @override
@@ -75,12 +141,27 @@ class _CuisineScreenState extends State<CuisineScreen> {
                   ),
                   const SizedBox(height: 8),
                   ...MockData.topCuisine.map((food) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      '${food['icon']} ${food['name']}  ⭐ ${food['rating']}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.9),
-                      ),
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.asset(
+                            food['icon']!,
+                            width: 32,
+                            height: 32,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => const Icon(Icons.fastfood, color: Colors.white, size: 32),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          '${food['name']}  ⭐ ${food['rating']}',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.9),
+                          ),
+                        ),
+                      ],
                     ),
                   )),
                 ],
@@ -113,12 +194,17 @@ class _CuisineScreenState extends State<CuisineScreen> {
                 itemBuilder: (context, index) {
                   final food = _filteredCuisine[index];
                   return SizedBox(
-                    width: 300, // Fixed width for horizontal cards
+                    width: 320, // Wider for distance and button
                     child: PlaceCard(
                       emoji: food['icon']!,
                       name: food['name']!,
                       description: food['type']!,
                       rating: food['rating'],
+                      trailing: _getDistance(food),
+                      action: IconButton(
+                        icon: const Icon(Icons.bookmark_add_outlined, color: AppTheme.primary),
+                        onPressed: () => _saveToPlan(food),
+                      ),
                       onTap: () {},
                     ),
                   );

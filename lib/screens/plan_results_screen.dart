@@ -90,6 +90,7 @@ class PlanResultsScreen extends StatelessWidget {
                         backgroundColor: AppTheme.primary,
                       ),
                     );
+                    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                   },
                 ),
               );

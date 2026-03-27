@@ -68,6 +68,7 @@ class _RoadTripCardState extends State<_RoadTripCard> {
     final trip = widget.trip;
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => setState(() => _expanded = !_expanded),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),

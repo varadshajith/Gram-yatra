@@ -46,7 +46,7 @@ class FestivalsScreen extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                   const AppImage('assets/images/kumbh_mela.jpg'),
+                   const AppImage('assets/images/Kumbhamela.jpeg'),
                    Container(
                      decoration: BoxDecoration(
                        gradient: LinearGradient(

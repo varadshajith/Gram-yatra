@@ -55,30 +55,17 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
             // Current location
             Text(AppStrings.currentLocation, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppTheme.surfaceContainerLow,
-                borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.my_location_rounded, color: AppTheme.secondary, size: 20),
-                  const SizedBox(width: 12),
-                  Text(
-                    'Nashik City Center',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  const Spacer(),
-                  Text(
-                    'Change',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
+            TextField(
+              controller: TextEditingController(text: 'Nashik City Center'),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.my_location_rounded, color: AppTheme.secondary, size: 20),
+                filled: true,
+                fillColor: AppTheme.surfaceContainerLow,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
 
