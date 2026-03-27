@@ -1,41 +1,218 @@
 [
   {
-    "xid": "N324546554",
-    "name": "Panchavati Ramkund",
-    "rate": 3,
-    "osm": "way/324546554",
-    "wikidata": "Q12345",
-    "kinds": "religion, historic_architecture, places_of_worship, hindu_temples",
-    "dist": 1450.2,
-    "point": {
-      "lon": 73.7915,
-      "lat": 20.0062
-    }
-  },
-  {
-    "xid": "W238641566",
+    "xid": "nashik_001",
     "name": "Trimbakeshwar Shiva Temple",
-    "rate": 3,
-    "osm": "way/238641566",
-    "wikidata": "Q1668822",
-    "kinds": "religion, places_of_worship, hindu_temples, historic_architecture",
-    "dist": 28400.5,
-    "point": {
-      "lon": 73.5312,
-      "lat": 19.9324
-    }
+    "category": "pilgrimage",
+    "rate": 5,
+    "lat": 19.9324,
+    "lng": 73.5312,
+    "description": "One of the 12 Jyotirlingas in India. Sacred temple dedicated to Lord Shiva, located at the source of the Godavari River.",
+    "photo": "assets/images/Trimabakeshkar.jpeg",
+    "address": "Trimbak, Nashik District, Maharashtra 422212",
+    "kinds": "temple, pilgrimage, religious, heritage"
   },
   {
-    "xid": "W418731383",
+    "xid": "nashik_002",
+    "name": "Panchavati Ramkund",
+    "category": "pilgrimage",
+    "rate": 5,
+    "lat": 20.0062,
+    "lng": 73.7915,
+    "description": "Sacred site where Lord Rama is believed to have bathed during his exile. Center of religious significance in Nashik.",
+    "photo": "assets/images/PanchavatiRamkund.jpeg",
+    "address": "Panchavati, Nashik, Maharashtra 422003",
+    "kinds": "temple, pilgrimage, river, heritage"
+  },
+  {
+    "xid": "nashik_003",
     "name": "Pandavleni Caves",
+    "category": "history",
+    "rate": 4,
+    "lat": 19.9572,
+    "lng": 73.7486,
+    "description": "Ancient rock-cut Buddhist caves dating back to 3rd century BC. Features intricate carvings and meditation halls.",
+    "photo": "assets/images/tourisms.jpeg",
+    "address": "Pandavleni, Pathardi Phata, Nashik 422010",
+    "kinds": "caves, buddhist, heritage, trekking"
+  },
+  {
+    "xid": "nashik_004",
+    "name": "Sula Vineyards",
+    "category": "nature",
+    "rate": 5,
+    "lat": 20.0123,
+    "lng": 73.6894,
+    "description": "India's most famous vineyard offering wine tastings, tours, and the iconic Sula Fest. Scenic views of Gangapur Dam.",
+    "photo": "assets/images/Sulawines.jpeg",
+    "address": "Gat 36/2, Gangapur-Savargaon Road, Nashik 422222",
+    "kinds": "vineyard, wine, nature, entertainment"
+  },
+  {
+    "xid": "nashik_005",
+    "name": "Saptashrungi Garh",
+    "category": "pilgrimage",
+    "rate": 4,
+    "lat": 20.0744,
+    "lng": 73.7621,
+    "description": "Hilltop temple dedicated to Goddess Saptashrungi, surrounded by seven mountain peaks. Requires ropeway or trek.",
+    "photo": "assets/images/Saptrashungigad.jpeg",
+    "address": "Vani, Nashik District, Maharashtra 422215",
+    "kinds": "temple, hill, trekking, pilgrimage"
+  },
+  {
+    "xid": "nashik_006",
+    "name": "Harishchandragad Fort",
+    "category": "adventure",
+    "rate": 5,
+    "lat": 19.3903,
+    "lng": 73.7781,
+    "description": "Ancient hill fortress famous for Konkan Kada cliff. Popular trekking destination with historic temples and caves.",
+    "photo": "assets/images/Harishchandragad.jpeg",
+    "address": "Malshej Ghat, Ahmednagar District (near Nashik)",
+    "kinds": "fort, trekking, adventure, history"
+  },
+  {
+    "xid": "nashik_007",
+    "name": "Shirdi Sai Baba Temple",
+    "category": "pilgrimage",
+    "rate": 5,
+    "lat": 19.7665,
+    "lng": 74.4774,
+    "description": "One of India's most visited pilgrimage sites. Samadhi temple of Sai Baba, visited by millions annually.",
+    "photo": "assets/images/Shirdi.jpeg",
+    "address": "Shirdi, Ahmednagar District, Maharashtra 423109",
+    "kinds": "temple, pilgrimage, spiritual"
+  },
+  {
+    "xid": "nashik_008",
+    "name": "Goda Ghat",
+    "category": "nature",
+    "rate": 4,
+    "lat": 20.0084,
+    "lng": 73.7809,
+    "description": "Serene ghats along the Godavari River. Perfect for morning walks and experiencing local culture.",
+    "photo": "assets/images/Godaarti.jpeg",
+    "address": "Godavari River, Panchavati, Nashik",
+    "kinds": "river, nature, spiritual, scenic"
+  },
+  {
+    "xid": "nashik_009",
+    "name": "Sahyadri Farms",
+    "category": "nature",
+    "rate": 4,
+    "lat": 19.9971,
+    "lng": 73.7084,
+    "description": "Experience rural Maharashtra with grape farms, traditional cuisine, and agricultural tours in the Sahyadri foothills.",
+    "photo": "assets/images/Sahyadrifarms.jpeg",
+    "address": "Gangapur Road, Nashik District",
+    "kinds": "farm, nature, agriculture, food"
+  },
+  {
+    "xid": "nashik_010",
+    "name": "Kumbh Mela Ground",
+    "category": "pilgrimage",
+    "rate": 5,
+    "lat": 20.0015,
+    "lng": 73.7862,
+    "description": "World's largest religious gathering venue. Next Kumbh Mela in August 2027. Sacred bathing ghats and temporary city.",
+    "photo": "assets/images/Kumbhamela.jpeg",
+    "address": "Trimbak Road, Nashik",
+    "kinds": "festival, pilgrimage, river, cultural"
+  },
+  {
+    "xid": "nashik_011",
+    "name": "Samartha Juice Center",
+    "category": "food",
+    "rate": 4,
+    "lat": 19.9891,
+    "lng": 73.7898,
+    "description": "Famous local spot for fresh sugarcane juice, seasonal fruit juices, and traditional Maharashtrian refreshments.",
+    "photo": "assets/images/Samarthajuice.jpeg",
+    "address": "Shalimar, Near CBS, Nashik",
+    "kinds": "food, drinks, local"
+  },
+  {
+    "xid": "nashik_012",
+    "name": "Bhandardara Lake",
+    "category": "nature",
+    "rate": 5,
+    "lat": 19.5521,
+    "lng": 73.7573,
+    "description": "Scenic hill station with Arthur Lake, Wilson Dam, and Ratangad Fort. Perfect for camping and stargazing.",
+    "photo": "assets/images/Bhandardara.jpeg",
+    "address": "Bhandardara, Ahmednagar District",
+    "kinds": "lake, nature, camping, adventure"
+  },
+  {
+    "xid": "nashik_013",
+    "name": "Traditional Cuisine",
+    "category": "food",
+    "rate": 4,
+    "lat": 19.9975,
+    "lng": 73.7898,
+    "description": "Experience authentic Nashik cuisine including Misal Pav, Sabudana Vada, and local Maharashtrian thalis.",
+    "photo": "assets/images/Misal.jpeg",
+    "address": "Old Nashik, Maharashtra",
+    "kinds": "food, local, cuisine"
+  },
+  {
+    "xid": "nashik_014",
+    "name": "Heritage Architecture",
+    "category": "history",
+    "rate": 4,
+    "lat": 20.0024,
+    "lng": 73.7834,
+    "description": "Colonial-era buildings and traditional wadas showcasing Nashik's rich architectural heritage.",
+    "photo": "assets/images/arhitecture.jpeg",
+    "address": "Old City, Nashik",
+    "kinds": "heritage, architecture, history"
+  },
+  {
+    "xid": "nashik_015",
+    "name": "Taparia Nature Trail",
+    "category": "nature",
     "rate": 3,
-    "osm": "way/418731383",
-    "wikidata": "Q3648171",
-    "kinds": "cultural, historic_architecture, archaeology, ancient_sites, tourist_object",
-    "dist": 8200.1,
-    "point": {
-      "lon": 73.7486,
-      "lat": 19.9572
-    }
+    "lat": 19.9845,
+    "lng": 73.7456,
+    "description": "Peaceful nature walk through local flora and fauna. Bird watching spot and picnic area.",
+    "photo": "assets/images/taparia.jpeg",
+    "address": "Taparia Hills, Nashik Outskirts",
+    "kinds": "nature, trekking, birds"
+  },
+  {
+    "xid": "nashik_016",
+    "name": "Anjaneri Hills",
+    "category": "adventure",
+    "rate": 4,
+    "lat": 19.9123,
+    "lng": 73.6245,
+    "description": "Birthplace of Lord Hanuman according to mythology. Popular trekking destination with Hanuman Temple at summit.",
+    "photo": "assets/images/tourisms.jpeg",
+    "address": "Anjaneri, Trimbak Road, Nashik",
+    "kinds": "trekking, temple, adventure, nature"
+  },
+  {
+    "xid": "nashik_017",
+    "name": "Budha Halwai",
+    "category": "food",
+    "rate": 5,
+    "lat": 19.9956,
+    "lng": 73.7923,
+    "description": "Iconic sweet shop famous for traditional Nashik sweets including Jalebi, Basundi, and seasonal delicacies.",
+    "photo": "assets/images/Budhahalwai.jpeg",
+    "address": "Main Road, Panchavati, Nashik",
+    "kinds": "food, sweets, traditional"
+  },
+  {
+    "xid": "nashik_018",
+    "name": "Gangapur Dam",
+    "category": "nature",
+    "rate": 4,
+    "lat": 20.0345,
+    "lng": 73.6789,
+    "description": "Picturesque dam with boating facilities and garden. Popular picnic spot with sunset views over water.",
+    "photo": "assets/images/Agriculture.jpeg",
+    "address": "Gangapur, Nashik District",
+    "kinds": "dam, nature, boating, picnic"
   }
 ]

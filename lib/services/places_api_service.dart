@@ -46,16 +46,18 @@ class PlacesApiService {
     final localPlaces = await DbService.instance.getPlaces();
     if (localPlaces.isNotEmpty) {
       // Rebuild the expected nested JSON structure from a flat DB row
-      return localPlaces.map((row) => {
-        'xid': row['xid'],
-        'name': row['name'],
-        'kinds': row['kinds'],
-        'osm': row['osm'],
-        'dist': row['dist'],
-        'point': {
-          'lon': row['lon'],
-          'lat': row['lat'],
-        }
+      return localPlaces.map((row) {
+        return {
+          'xid': row['xid'],
+          'name': row['name'],
+          'kinds': row['kinds'],
+          'osm': row['osm'],
+          'dist': row['dist'],
+          'point': {
+            'lon': row['lon'],
+            'lat': row['lat'],
+          }
+        };
       }).toList();
     }
 
