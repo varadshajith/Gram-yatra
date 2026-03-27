@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "805423906733",
+    "project_id": "gram-yatra-cb95d",
+    "storage_bucket": "gram-yatra-cb95d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805423906733:android:3034baa59b88839841ab24",
+        "android_client_info": {
+          "package_name": "com.example.gram_yatra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYnRkRBK3jVNp4bmYfP66Pm7ExNKxq4_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

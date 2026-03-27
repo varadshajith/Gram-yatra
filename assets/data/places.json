@@ -1,0 +1,41 @@
+[
+  {
+    "xid": "N324546554",
+    "name": "Panchavati Ramkund",
+    "rate": 3,
+    "osm": "way/324546554",
+    "wikidata": "Q12345",
+    "kinds": "religion, historic_architecture, places_of_worship, hindu_temples",
+    "dist": 1450.2,
+    "point": {
+      "lon": 73.7915,
+      "lat": 20.0062
+    }
+  },
+  {
+    "xid": "W238641566",
+    "name": "Trimbakeshwar Shiva Temple",
+    "rate": 3,
+    "osm": "way/238641566",
+    "wikidata": "Q1668822",
+    "kinds": "religion, places_of_worship, hindu_temples, historic_architecture",
+    "dist": 28400.5,
+    "point": {
+      "lon": 73.5312,
+      "lat": 19.9324
+    }
+  },
+  {
+    "xid": "W418731383",
+    "name": "Pandavleni Caves",
+    "rate": 3,
+    "osm": "way/418731383",
+    "wikidata": "Q3648171",
+    "kinds": "cultural, historic_architecture, archaeology, ancient_sites, tourist_object",
+    "dist": 8200.1,
+    "point": {
+      "lon": 73.7486,
+      "lat": 19.9572
+    }
+  }
+]
