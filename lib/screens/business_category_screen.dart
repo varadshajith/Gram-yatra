@@ -112,7 +112,7 @@ class _BusinessCategoryScreenState extends State<BusinessCategoryScreen> {
 
   String _fallbackImage(String category) {
     switch (category) {
-      case 'Architecture': return 'assets/images/arhitecture.jpeg';
+      case 'Architecture': return 'assets/images/architecture.jpeg';
       case 'Agriculture': return 'assets/images/Agriculture.jpeg';
       case 'Manufacturing': return 'assets/images/taparia.jpeg';
       case 'Tourism Services': return 'assets/images/tourisms.jpeg';

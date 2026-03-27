@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/theme.dart';
-import '../widgets/gradient_button.dart';
 import '../widgets/app_image.dart';
 
 /// Screen 8: Individual Place Detail
@@ -18,189 +16,192 @@ class PlaceDetailScreen extends StatelessWidget {
     final category = place['category'] ?? 'attraction';
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          // Hero header
-          SliverAppBar(
-            expandedHeight: 260,
-            pinned: true,
-            leading: IconButton(
-              icon: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppTheme.surface.withValues(alpha: 0.8),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.arrow_back_rounded, size: 20),
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                fit: StackFit.expand,
-                children: [
-                  AppImage(emoji),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.5),
-                        ],
+      body: Column(
+        children: [
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                // Hero header
+                SliverAppBar(
+                  expandedHeight: 260,
+                  pinned: true,
+                  leading: IconButton(
+                    icon: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppTheme.surface.withValues(alpha: 0.8),
+                        shape: BoxShape.circle,
                       ),
+                      child: const Icon(Icons.arrow_back_rounded, size: 20),
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        AppImage(emoji),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withValues(alpha: 0.5),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
+                ),
 
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Category label
-                  Text(
-                    category.toUpperCase(),
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                  const SizedBox(height: 8),
-
-                  // Name
-                  Text(name, style: Theme.of(context).textTheme.headlineSmall),
-                  const SizedBox(height: 12),
-
-                  // Rating
-                  Row(
-                    children: [
-                      const Icon(Icons.star_rounded, size: 20, color: AppTheme.secondary),
-                      const SizedBox(width: 4),
-                      Text(
-                        rating,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppTheme.secondary,
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Category label
+                        Text(
+                          category.replaceAll('_', ' ').toUpperCase(),
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppTheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                        const SizedBox(height: 8),
+
+                        // Name
+                        Text(name, style: Theme.of(context).textTheme.headlineSmall),
+                        const SizedBox(height: 12),
+
+                        // Rating
+                        Row(
                           children: [
-                            const Icon(Icons.schedule, size: 14, color: AppTheme.onSurfaceVariant),
+                            const Icon(Icons.star_rounded, size: 20, color: AppTheme.secondary),
                             const SizedBox(width: 4),
                             Text(
-                              '6 AM – 9 PM',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontSize: 12,
-                                color: AppTheme.onSurfaceVariant,
+                              rating,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: AppTheme.secondary,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppTheme.surfaceContainerHighest,
+                                borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.schedule, size: 14, color: AppTheme.onSurfaceVariant),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '6 AM – 9 PM',
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                      fontSize: 12,
+                                      color: AppTheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
 
-                  const SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
-                  // Description
-                  Text(
-                    description,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: AppTheme.onSurfaceVariant,
-                      height: 1.6,
-                    ),
-                  ),
+                        // Description
+                        Text(
+                          description,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: AppTheme.onSurfaceVariant,
+                            height: 1.6,
+                          ),
+                        ),
 
-                  const SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
-                  // Quick info
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppTheme.surfaceContainerLow,
-                      borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                    ),
-                    child: Column(
-                      children: [
-                        _InfoRow(icon: Icons.directions_car, label: 'Distance', value: '12 km from city center'),
-                        const SizedBox(height: 16),
-                        _InfoRow(icon: Icons.currency_rupee, label: 'Entry Fee', value: 'Free'),
-                        const SizedBox(height: 16),
-                        _InfoRow(icon: Icons.calendar_today, label: 'Best Time', value: 'Oct – Feb'),
+                        // Quick info
+                        Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: AppTheme.surfaceContainerLow,
+                            borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                          ),
+                          child: Column(
+                            children: [
+                              _InfoRow(icon: Icons.directions_car, label: 'Distance', value: '12 km from city center'),
+                              const SizedBox(height: 16),
+                              _InfoRow(icon: Icons.currency_rupee, label: 'Entry Fee', value: 'Free'),
+                              const SizedBox(height: 16),
+                              _InfoRow(icon: Icons.calendar_today, label: 'Best Time', value: 'Oct – Feb'),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 32),
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 32),
-
-                  // CTAs
-                  Row(
-                    children: [
-                      Expanded(
-                        child: GradientButton(
-                          label: 'Add to My Plan',
-                          icon: Icons.add_rounded,
-                          onPressed: () async {
-                            final prefs = await SharedPreferences.getInstance();
-                            final saved = prefs.getStringList('savedPlaces') ?? [];
-                            if (!saved.contains(name)) {
-                              saved.add(name);
-                              await prefs.setStringList('savedPlaces', saved);
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('$name added to your plan!'),
-                                    backgroundColor: AppTheme.primary,
-                                  ),
-                                );
-                              }
-                            } else {
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('$name is already in your plan.')),
-                                );
-                              }
-                            }
-                          },
+                ),
+              ],
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.add_rounded),
+                      label: const Text('Add to My Plan'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: AppTheme.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppTheme.radiusFull),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          icon: const Icon(Icons.view_in_ar_rounded, color: AppTheme.primary),
-                          label: Text(
-                            'AR/VR View',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppTheme.primary,
-                              fontWeight: FontWeight.bold,
+                      onPressed: () {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('$name added to your plan!'),
+                              backgroundColor: AppTheme.primary,
                             ),
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: const BorderSide(color: AppTheme.primary),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/ar-view', arguments: name);
-                          },
-                        ),
-                      ),
-                    ],
+                          );
+                        }
+                      },
+                    ),
                   ),
-
-                  const SizedBox(height: 32),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.view_in_ar_rounded, color: AppTheme.primary),
+                      label: Text(
+                        'AR/VR View',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppTheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        side: const BorderSide(color: AppTheme.primary),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/ar-view', arguments: name);
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

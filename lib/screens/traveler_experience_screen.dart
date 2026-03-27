@@ -62,16 +62,19 @@ class TravelerExperienceScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Filter row
-            Row(
-              children: [
-                _FilterChip(label: 'Recent', selected: true),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Popular', selected: false),
-                const SizedBox(width: 8),
-                _FilterChip(label: '📷 Photos', selected: false),
-                const SizedBox(width: 8),
-                _FilterChip(label: '🎥 Videos', selected: false),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _FilterChip(label: 'Recent', selected: true),
+                  const SizedBox(width: 8),
+                  _FilterChip(label: 'Popular', selected: false),
+                  const SizedBox(width: 8),
+                  _FilterChip(label: '📷 Photos', selected: false),
+                  const SizedBox(width: 8),
+                  _FilterChip(label: '🎥 Videos', selected: false),
+                ],
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -203,7 +206,11 @@ class _TravelerPost extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                AppImage(post['image'] ?? ''),
+                Image.asset(
+                  post['image']!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stack) => Container(color: const Color(0xFF7B2D8B)),
+                ),
                 if (post['type'] == 'video')
                   const Center(
                     child: Icon(Icons.play_circle_outline, size: 48, color: Colors.white70),

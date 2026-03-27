@@ -4,7 +4,6 @@ import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/category_chip.dart';
-import '../main.dart';
 
 /// Screen 3: Profile Setup / Returning User
 class ProfileSetupScreen extends StatefulWidget {
@@ -161,25 +160,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
               const SizedBox(height: 32),
 
-              // Dark Mode Toggle
-               ValueListenableBuilder<ThemeMode>(
-                 valueListenable: themeNotifier,
-                 builder: (context, mode, child) {
-                   return SwitchListTile(
-                     contentPadding: EdgeInsets.zero,
-                     title: Text(
-                       'Dark Mode',
-                       style: Theme.of(context).textTheme.titleMedium,
-                     ),
-                     value: mode == ThemeMode.dark,
-                     onChanged: (val) {
-                       themeNotifier.value = val ? ThemeMode.dark : ThemeMode.light;
-                     },
-                     activeTrackColor: AppTheme.primary.withValues(alpha: 0.5),
-                     activeThumbColor: AppTheme.primary,
-                   );
-                 },
-               ),
+
 
               const SizedBox(height: 32),
 

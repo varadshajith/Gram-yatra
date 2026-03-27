@@ -45,15 +45,15 @@ class MockData {
     {'name': 'Sadhana Misal', 'type': 'Misal', 'rating': '4.9', 'icon': 'assets/images/Misal.jpeg', 'lat': '19.9975', 'lng': '73.7898'},
     {'name': 'Samarth Juice', 'type': 'Drinks', 'rating': '4.7', 'icon': 'assets/images/Samarthajuice.jpeg', 'lat': '20.0055', 'lng': '73.7912'},
     {'name': 'Buda Halwai', 'type': 'Sweets', 'rating': '4.8', 'icon': 'assets/images/Budhahalwai.jpeg', 'lat': '19.9982', 'lng': '73.7856'},
-    {'name': 'Sainzara Vadaj', 'type': 'Snacks', 'rating': '4.6', 'icon': 'assets/images/Misal.jpeg', 'lat': '19.9991', 'lng': '73.7820'},
-    {'name': 'Jotka Misal', 'type': 'Misal', 'rating': '4.8', 'icon': 'assets/images/Misal.jpeg', 'lat': '20.0023', 'lng': '73.7885'},
+    {'name': 'Sayantara Vada', 'type': 'Snacks', 'rating': '4.6', 'icon': 'assets/images/sayantara_vada.jpg', 'lat': '19.9991', 'lng': '73.7820'},
+    {'name': 'Zatka Panipuri', 'type': 'Snacks', 'rating': '4.8', 'icon': 'assets/images/zatka_panipuri.jpg', 'lat': '20.0023', 'lng': '73.7885'},
   ];
 
   static const List<String> cuisineCategories = ['All', 'Misal', 'Sweets', 'Drinks', 'Snacks'];
 
   // ─── Local Business Categories ───
   static const List<Map<String, String>> businessCategories = [
-    {'name': 'Architecture', 'icon': 'assets/images/arhitecture.jpeg', 'count': '12'},
+    {'name': 'Architecture', 'icon': 'assets/images/architecture.jpeg', 'count': '12'},
     {'name': 'Agriculture', 'icon': 'assets/images/Agriculture.jpeg', 'count': '18'},
     {'name': 'Manufacturing', 'icon': 'assets/images/taparia.jpeg', 'count': '9'},
     {'name': 'Tourism Services', 'icon': 'assets/images/tourisms.jpeg', 'count': '15'},
@@ -83,9 +83,9 @@ class MockData {
       {'name': 'Yeola Paithani Hub', 'desc': 'Traditional silk sarees', 'rating': '4.8', 'image': 'assets/images/traditionalfashion.jpeg'},
     ],
     'Architecture': [
-      {'name': 'Pandavleni Caves', 'desc': '2000-year-old Buddhist rock-cut caves', 'rating': '4.7', 'image': 'assets/images/arhitecture.jpeg'},
-      {'name': 'Coin Museum Nashik', 'desc': 'Historic numismatic collection', 'rating': '4.4', 'image': 'assets/images/arhitecture.jpeg'},
-      {'name': 'Kalaram Temple Complex', 'desc': 'Black stone Ram temple, 18th century', 'rating': '4.8', 'image': 'assets/images/arhitecture.jpeg'},
+      {'name': 'Pandavleni Caves', 'desc': '2000-year-old Buddhist rock-cut caves', 'rating': '4.7', 'image': 'assets/images/architecture.jpeg'},
+      {'name': 'Coin Museum Nashik', 'desc': 'Historic numismatic collection', 'rating': '4.4', 'image': 'assets/images/architecture.jpeg'},
+      {'name': 'Kalaram Temple Complex', 'desc': 'Black stone Ram temple, 18th century', 'rating': '4.8', 'image': 'assets/images/architecture.jpeg'},
     ],
   };
 
@@ -219,7 +219,7 @@ class MockData {
     {
       'user': 'Priya M.',
       'avatar': 'assets/images/user_priya.jpg',
-      'image': 'assets/images/post_trimbak.jpg',
+      'image': 'assets/images/stories_trimbakeshwar.jpg',
       'caption': 'The sunrise at Trimbakeshwar was absolutely magical! Must visit during monsoons. 🌧️🛕',
       'likes': '234',
       'time': '2 days ago',
@@ -228,7 +228,7 @@ class MockData {
     {
       'user': 'Rahul K.',
       'avatar': 'assets/images/user_rahul.jpg',
-      'image': 'assets/images/post_misal.jpg',
+      'image': 'assets/images/stories_sadhana_misal.jpg',
       'caption': 'Gram Yatra helped us find Sadhana Misal — the spiciest and best misal in Nashik! 🌶️🔥',
       'likes': '189',
       'time': '5 days ago',
@@ -237,7 +237,7 @@ class MockData {
     {
       'user': 'Anita S.',
       'avatar': 'assets/images/user_anita.jpg',
-      'image': 'assets/images/post_trek.jpg',
+      'image': 'assets/images/stories_anjaneri_hills.jpg',
       'caption': 'Our family trek to Anjaneri Hills was unforgettable. The AI plan saved us so much time!',
       'likes': '312',
       'time': '1 week ago',
@@ -246,7 +246,7 @@ class MockData {
     {
       'user': 'Vikram T.',
       'avatar': 'assets/images/user_vikram.jpg',
-      'image': 'assets/images/post_sula.jpg',
+      'image': 'assets/images/stories_sula_wines.jpg',
       'caption': 'Sula Vineyards sunset tour is a must. Pro tip: book the Beyond experience!',
       'likes': '156',
       'time': '2 weeks ago',

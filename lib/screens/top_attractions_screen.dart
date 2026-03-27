@@ -3,7 +3,7 @@ import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../utils/constants.dart';
 import '../widgets/section_header.dart';
-import '../widgets/place_card.dart';
+
 
 /// Screen 7: Top 5 Attractions with AR/VR option
 class TopAttractionsScreen extends StatelessWidget {
@@ -67,19 +67,79 @@ class TopAttractionsScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          place['category']!.toUpperCase(),
+                          place['category']!.replaceAll('_', ' ').toUpperCase(),
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
 
-                    PlaceCard(
-                      emoji: place['image']!,
-                      name: place['name']!,
-                      description: place['description']!,
-                      rating: place['rating'],
+                    GestureDetector(
                       onTap: () => Navigator.pushNamed(context, '/place-detail', arguments: place),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppTheme.surfaceContainerLowest,
+                          borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                          boxShadow: AppTheme.ambientShadow,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.vertical(top: Radius.circular(AppTheme.radiusMd)),
+                              child: Image.asset(
+                                place['image']!,
+                                height: 180,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) => Container(
+                                  height: 180,
+                                  color: const Color(0xFF7B2D8B),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(AppTheme.spacingMedium),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          place['name']!,
+                                          style: Theme.of(context).textTheme.titleMedium,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(Icons.star_rounded, size: 16, color: AppTheme.secondary),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            place['rating']!,
+                                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: AppTheme.secondary,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    place['description']!,
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                      color: AppTheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),

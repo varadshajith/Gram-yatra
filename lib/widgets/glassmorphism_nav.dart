@@ -48,10 +48,11 @@ class GlassmorphismNav extends StatelessWidget {
                   onTap: () => onTap(2),
                 ),
                 _NavItem(
-                  icon: Icons.celebration_rounded,
-                  label: 'Events',
+                  icon: Icons.sos,
+                  label: 'SOS',
                   isSelected: currentIndex == 3,
                   onTap: () => onTap(3),
+                  isSos: true,
                 ),
                 _NavItem(
                   icon: Icons.person_rounded,
@@ -74,11 +75,14 @@ class _NavItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
+  final bool isSos;
+
   const _NavItem({
     required this.icon,
     required this.label,
     required this.isSelected,
     required this.onTap,
+    this.isSos = false,
   });
 
   @override
@@ -101,7 +105,7 @@ class _NavItem extends StatelessWidget {
             Icon(
               icon,
               size: 24,
-              color: isSelected ? AppTheme.primary : AppTheme.onSurfaceVariant,
+              color: isSos ? Colors.red : (isSelected ? AppTheme.primary : AppTheme.onSurfaceVariant),
             ),
             const SizedBox(height: 2),
             Text(
