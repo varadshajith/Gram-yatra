@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 import 'utils/theme.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/profile_setup_screen.dart';
 import 'screens/user_profile_screen.dart';
 import 'screens/home_screen.dart';
@@ -56,8 +57,13 @@ class GramYatraApp extends StatelessWidget {
         },
       ),
       routes: {
+<<<<<<< HEAD
         '/welcome': (context) => const WelcomeScreen(),
         '/login': (context) => const Scaffold(body: Center(child: Text('Login UI Placeholder'))),
+=======
+        '/': (context) => const WelcomeScreen(),
+        '/login': (context) => const LoginScreen(),
+>>>>>>> origin/tanvi
         '/profile-setup': (context) => const ProfileSetupScreen(),
         '/user-profile': (context) => const UserProfileScreen(),
         '/home': (context) => const HomeScreen(),
