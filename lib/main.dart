@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'utils/theme.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/profile_setup_screen.dart';
 import 'screens/user_profile_screen.dart';
 import 'screens/home_screen.dart';
@@ -42,6 +43,7 @@ class GramYatraApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
+        '/login': (context) => const LoginScreen(),
         '/profile-setup': (context) => const ProfileSetupScreen(),
         '/user-profile': (context) => const UserProfileScreen(),
         '/home': (context) => const HomeScreen(),
