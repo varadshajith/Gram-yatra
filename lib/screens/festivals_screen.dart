@@ -79,8 +79,6 @@ class FestivalsScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('🎉', style: TextStyle(fontSize: 40)),
-                              const SizedBox(height: 12),
                               Text(
                                 'Festival Capital\nof Maharashtra',
                                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(

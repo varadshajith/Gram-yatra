@@ -89,5 +89,5 @@ class AppStrings {
   static const String upcoming = 'UPCOMING';
 
   // ─── Festivals ───
-  static const String festivalsTitle = 'Festivals Dhamaka 🎉';
+  static const String festivalsTitle = 'Festivals Dhamaka';
 }

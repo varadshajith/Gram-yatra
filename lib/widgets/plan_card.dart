@@ -118,7 +118,7 @@ class PlanCard extends StatelessWidget {
                 Text(
                   highlights,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: bgImageAsset != null ? AppTheme.secondaryContainer : AppTheme.secondary,
+                    color: bgImageAsset != null ? AppTheme.secondaryContainer : const Color(0xFF1A0A2E),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
