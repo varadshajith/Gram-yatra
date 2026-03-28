@@ -23,6 +23,7 @@ import 'screens/map_screen.dart';
 import 'screens/sos_screen.dart';
 import 'screens/kumbh_screen.dart';
 import 'screens/plan_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,9 +43,21 @@ class GramYatraApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       themeMode: ThemeMode.light,
-      initialRoute: '/',
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          }
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const Scaffold(body: Center(child: Text('Login UI Placeholder')));
+        },
+      ),
       routes: {
-        '/': (context) => const WelcomeScreen(),
+        '/welcome': (context) => const WelcomeScreen(),
+        '/login': (context) => const Scaffold(body: Center(child: Text('Login UI Placeholder'))),
         '/profile-setup': (context) => const ProfileSetupScreen(),
         '/user-profile': (context) => const UserProfileScreen(),
         '/home': (context) => const HomeScreen(),
