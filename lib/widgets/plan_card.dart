@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../widgets/app_image.dart';
+import 'scale_tap.dart';
 
 /// AI plan result card with name, tagline, stops, cost, and CTA.
 class PlanCard extends StatelessWidget {
@@ -27,14 +28,20 @@ class PlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = bgImageAsset != null ? Colors.white : AppTheme.onSurface;
-    final textVariantColor = bgImageAsset != null ? Colors.white70 : AppTheme.onSurfaceVariant;
+    final textColor = bgImageAsset != null ? Colors.white : const Color(0xFF1A0A2E);
+    final textVariantColor = bgImageAsset != null ? Colors.white70 : const Color(0xFF7B2D8B);
     
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-        boxShadow: AppTheme.ambientShadow,
+        color: const Color(0xFFF2E8D5),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.12),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
@@ -120,18 +127,28 @@ class PlanCard extends StatelessWidget {
 
                 // CTA
                 if (onStart != null)
-                  SizedBox(
-                    width: double.infinity,
+                  ScaleTap(
+                    onTap: onStart,
+                    pressedScale: 0.96,
                     child: Container(
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         gradient: AppTheme.primaryGradient,
-                        borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.primary.withValues(alpha: 0.3),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: onStart,
-                          borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                          borderRadius: BorderRadius.circular(14),
+                          splashColor: AppTheme.onPrimary.withValues(alpha: 0.2),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             child: Center(

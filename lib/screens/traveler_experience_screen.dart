@@ -45,46 +45,64 @@ class TravelerExperienceScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-
-            Text(
-              'Stories from fellow travelers',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/stories_trimbakeshwar.jpg',
+              fit: BoxFit.cover,
             ),
-
-            const SizedBox(height: 24),
-
-            // Filter row
-            Row(
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _FilterChip(label: 'Recent', selected: true),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Popular', selected: false),
-                const SizedBox(width: 8),
-                _FilterChip(label: '📷 Photos', selected: false),
-                const SizedBox(width: 8),
-                _FilterChip(label: '🎥 Videos', selected: false),
+                const SizedBox(height: 8),
+
+                Text(
+                  'Stories from fellow travelers',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white.withValues(alpha: 0.9),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Filter row
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _FilterChip(label: 'Recent', selected: true),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: 'Popular', selected: false),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: '📷 Photos', selected: false),
+                      const SizedBox(width: 8),
+                      _FilterChip(label: '🎥 Videos', selected: false),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Traveler posts
+                ...MockData.travelerPosts.map((post) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: _TravelerPost(post: post),
+                )),
+
+                const SizedBox(height: 80), // FAB clearance
               ],
             ),
-
-            const SizedBox(height: 24),
-
-            // Traveler posts
-            ...MockData.travelerPosts.map((post) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _TravelerPost(post: post),
-            )),
-
-            const SizedBox(height: 80), // FAB clearance
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -108,7 +126,7 @@ class _FilterChip extends StatelessWidget {
         label,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontSize: 12,
-          color: selected ? AppTheme.primary : AppTheme.onSurfaceVariant,
+          color: selected ? AppTheme.primary : const Color(0xFF7B2D8B),
           fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
         ),
       ),
@@ -155,13 +173,14 @@ class _TravelerPost extends StatelessWidget {
                       post['user']!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
+                        color: const Color(0xFF1A0A2E),
                       ),
                     ),
                     Text(
                       post['time']!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 12,
-                        color: AppTheme.onSurfaceVariant,
+                        color: const Color(0xFF7B2D8B),
                       ),
                     ),
                   ],
@@ -203,7 +222,11 @@ class _TravelerPost extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                AppImage(post['image'] ?? ''),
+                Image.asset(
+                  post['image']!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stack) => Container(color: const Color(0xFF7B2D8B)),
+                ),
                 if (post['type'] == 'video')
                   const Center(
                     child: Icon(Icons.play_circle_outline, size: 48, color: Colors.white70),
@@ -219,6 +242,7 @@ class _TravelerPost extends StatelessWidget {
             post['caption']!,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               height: 1.5,
+              color: const Color(0xFF1A0A2E),
             ),
           ),
 
@@ -233,7 +257,7 @@ class _TravelerPost extends StatelessWidget {
                 '${post['likes']} likes',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 13,
-                  color: AppTheme.onSurfaceVariant,
+                  color: const Color(0xFF7B2D8B),
                 ),
               ),
               const Spacer(),

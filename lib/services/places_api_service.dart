@@ -29,7 +29,7 @@ class PlacesApiService {
         final places = data.cast<Map<String, dynamic>>();
         
         // Cache to SQLite
-        await DbService.instance.insertPlaces(places);
+        // await DbService.instance.insertPlaces(places); // Disabled temporarily to conform to new V2 Schema
         
         return places;
       } else {
@@ -43,22 +43,9 @@ class PlacesApiService {
 
   static Future<List<Map<String, dynamic>>> _getFallbackData() async {
     // 1. Try reading from SQLite cache
-    final localPlaces = await DbService.instance.getPlaces();
+    final localPlaces = await DbService.instance.getAllPlaces();
     if (localPlaces.isNotEmpty) {
-      // Rebuild the expected nested JSON structure from a flat DB row
-      return localPlaces.map((row) {
-        return {
-          'xid': row['xid'],
-          'name': row['name'],
-          'kinds': row['kinds'],
-          'osm': row['osm'],
-          'dist': row['dist'],
-          'point': {
-            'lon': row['lon'],
-            'lat': row['lat'],
-          }
-        };
-      }).toList();
+      return localPlaces;
     }
 
     // 2. If SQLite is empty, fall back to bundled assets JSON
@@ -68,7 +55,7 @@ class PlacesApiService {
       final places = data.cast<Map<String, dynamic>>();
       
       // Save asset data to DB for future offline use
-      await DbService.instance.insertPlaces(places);
+      // await DbService.instance.insertPlaces(places); 
       
       return places;
     } catch (e) {

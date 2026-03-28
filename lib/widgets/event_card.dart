@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import '../widgets/app_image.dart';
+import 'scale_tap.dart';
 
 /// Card for events and festivals.
 class EventCard extends StatelessWidget {
@@ -23,14 +24,21 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ScaleTap(
       onTap: onTap,
+      pressedScale: 0.97,
       child: Container(
         padding: const EdgeInsets.all(AppTheme.spacingSmall),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceContainerLowest,
-          borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-          boxShadow: AppTheme.ambientShadow,
+          color: const Color(0xFFF2E8D5),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.12),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +61,9 @@ class EventCard extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: const Color(0xFF1A0A2E),
+                        ),
                       ),
                       const SizedBox(height: 2),
                       Container(
@@ -81,7 +91,7 @@ class EventCard extends StatelessWidget {
             Text(
               description,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
+                color: const Color(0xFF7B2D8B),
               ),
             ),
 

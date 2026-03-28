@@ -13,6 +13,7 @@ class RoadTripsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(AppStrings.roadTripsTitle),
         leading: IconButton(
@@ -20,32 +21,51 @@ class RoadTripsScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Harishchandragad.jpeg',
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(color: const Color(0xFF1A0A2E)),
+            ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
+          Positioned.fill(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
 
-            Text(
-              'Scenic drives and day trips around Nashik',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
+                  Text(
+                    'Scenic drives and day trips around Nashik',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.9),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  const SectionHeader(title: 'Popular Trips'),
+
+                  ...MockData.roadTrips.map((trip) => Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: _RoadTripCard(trip: trip),
+                  )),
+
+                  const SizedBox(height: 100),
+                ],
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            const SectionHeader(title: 'Popular Trips'),
-
-            ...MockData.roadTrips.map((trip) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _RoadTripCard(trip: trip),
-            )),
-
-            const SizedBox(height: 24),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -74,9 +94,15 @@ class _RoadTripCardState extends State<_RoadTripCard> {
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.all(AppTheme.spacingMedium),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceContainerLowest,
-          borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-          boxShadow: AppTheme.ambientShadow,
+          color: const Color(0xFFF2E8D5),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.12),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +125,9 @@ class _RoadTripCardState extends State<_RoadTripCard> {
                     children: [
                       Text(
                         trip['name']!,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: const Color(0xFF1A0A2E),
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Wrap(
@@ -145,7 +173,7 @@ class _RoadTripCardState extends State<_RoadTripCard> {
               Text(
                 trip['desc']!,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppTheme.onSurfaceVariant,
+                  color: const Color(0xFF7B2D8B),
                   height: 1.5,
                 ),
               ),

@@ -8,6 +8,7 @@ import '../widgets/place_card.dart';
 import '../widgets/event_card.dart';
 import '../widgets/glassmorphism_nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/weather_service.dart';
 
 /// Screen 4: Main Explore Nashik Home Hub
 class HomeScreen extends StatefulWidget {
@@ -73,6 +74,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Cinematic Background
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Background for app.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 100),
@@ -91,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               AppStrings.exploreNashik,
                               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: AppTheme.primary,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -99,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               AppStrings.tagline,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppTheme.onSurfaceVariant,
+                                color: Colors.white.withValues(alpha: 0.9),
                               ),
                             ),
                           ],
@@ -110,17 +123,31 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 44,
                             height: 44,
                             decoration: BoxDecoration(
-                              color: AppTheme.surfaceContainerLow,
+                              color: Colors.white.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.notifications_outlined, color: AppTheme.onSurfaceVariant),
+                            child: const Icon(Icons.notifications_outlined, color: Colors.white),
                           ),
                         ),
                       ],
                     ),
                   ),
 
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 16),
+
+                  // Weather & Crowd Tags
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      children: [
+                        _WeatherWidget(),
+                        const SizedBox(width: 12),
+                        _CrowdWidget(),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
 
                   // Build Your Plan CTA
                   Padding(
@@ -316,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           // Glassmorphism bottom nav
-            GlassmorphismNav(
+          GlassmorphismNav(
             currentIndex: _navIndex,
             onTap: (i) {
               setState(() => _navIndex = i);
@@ -328,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, '/plan-builder');
                   break;
                 case 3:
-                  Navigator.pushNamed(context, '/festivals');
+                  Navigator.pushNamed(context, '/sos');
                   break;
                 case 4:
                   Navigator.pushNamed(context, '/user-profile');
@@ -381,3 +408,92 @@ class _SectionTab extends StatelessWidget {
     );
   }
 }
+
+class _WeatherWidget extends StatefulWidget {
+  @override
+  State<_WeatherWidget> createState() => _WeatherWidgetState();
+}
+
+class _WeatherWidgetState extends State<_WeatherWidget> {
+  Map<String, dynamic>? _weather;
+
+  @override
+  void initState() {
+    super.initState();
+    WeatherService().fetchNashikWeather().then((data) {
+      if (mounted) setState(() => _weather = data);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_weather == null) return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.network(_weather!['iconUrl'] as String, width: 20, height: 20),
+          const SizedBox(width: 6),
+          Text(
+            '${_weather!['temp']}°C | ${_weather!['condition']}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppTheme.primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CrowdWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final hour = DateTime.now().hour;
+    Color badgeColor;
+    String label;
+
+    if (hour >= 6 && hour <= 11) {
+      badgeColor = Colors.green;
+      label = 'Low Crowd';
+    } else if (hour >= 12 && hour <= 17) {
+      badgeColor = Colors.orange;
+      label = 'Medium Crowd';
+    } else if (hour >= 18 && hour <= 22) {
+      badgeColor = Colors.red;
+      label = 'High Crowd';
+    } else {
+      badgeColor = Colors.grey;
+      label = 'Closed';
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: badgeColor.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.groups, size: 16, color: badgeColor),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: badgeColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

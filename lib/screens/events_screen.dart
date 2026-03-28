@@ -12,6 +12,7 @@ class EventsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(AppStrings.eventsTitle),
         leading: IconButton(
@@ -53,99 +54,119 @@ class EventsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-
-            Text(
-              'Never miss what\'s happening in Nashik',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppTheme.onSurfaceVariant,
-              ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Godaarti.jpeg',
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(color: const Color(0xFF1A0A2E)),
             ),
-
-            const SizedBox(height: 24),
-
-            // Daily events
-            const SectionHeader(title: 'Daily Events'),
-
-            ...MockData.dailyEvents.map((event) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: EventCard(
-                icon: event['icon']!,
-                name: event['name']!,
-                timeOrDate: event['time']!,
-                description: event['desc']!,
-              ),
-            )),
-
-            const SizedBox(height: 28),
-
-            // Upcoming events
-            const SectionHeader(title: 'Upcoming'),
-
-            ...MockData.upcomingEvents.map((event) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: EventCard(
-                icon: event['icon']!,
-                name: event['name']!,
-                timeOrDate: event['date']!,
-                description: event['desc']!,
-              ),
-            )),
-
-            const SizedBox(height: 28),
-
-            // Add to calendar CTA
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppTheme.primaryFixedDim.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-              ),
-              child: Row(
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.55),
+            ),
+          ),
+          Positioned.fill(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: AppTheme.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
+                  const SizedBox(height: 8),
+
+                  Text(
+                    'Never miss what\'s happening in Nashik',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.9),
                     ),
-                    child: const Icon(Icons.notifications_active_rounded, color: AppTheme.primary),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                  const SizedBox(height: 24),
+
+                  // Daily events
+                  const SectionHeader(title: 'Daily Events'),
+
+                  ...MockData.dailyEvents.map((event) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: EventCard(
+                      icon: event['icon']!,
+                      name: event['name']!,
+                      timeOrDate: event['time']!,
+                      description: event['desc']!,
+                    ),
+                  )),
+
+                  const SizedBox(height: 28),
+
+                  // Upcoming events
+                  const SectionHeader(title: 'Upcoming'),
+
+                  ...MockData.upcomingEvents.map((event) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: EventCard(
+                      icon: event['icon']!,
+                      name: event['name']!,
+                      timeOrDate: event['date']!,
+                      description: event['desc']!,
+                    ),
+                  )),
+
+                  const SizedBox(height: 28),
+
+                  // Add to calendar CTA
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                    ),
+                    child: Row(
                       children: [
-                        Text(
-                          'Get Event Alerts',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppTheme.primary,
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primary.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(12),
                           ),
+                          child: const Icon(Icons.notifications_active_rounded, color: AppTheme.primary),
                         ),
-                        Text(
-                          'Never miss Goda Arti or local exhibitions',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.onSurfaceVariant,
-                            fontSize: 13,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Get Event Alerts',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                'Never miss Goda Arti or local exhibitions',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
+
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
-
-            const SizedBox(height: 32),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

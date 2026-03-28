@@ -24,7 +24,7 @@ class CategoryChip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primaryFixedDim : AppTheme.surfaceContainerLow,
+          color: isSelected ? AppTheme.primaryFixedDim : Colors.white.withOpacity(0.15),
           borderRadius: BorderRadius.circular(AppTheme.radiusFull),
         ),
         child: Row(
@@ -34,14 +34,14 @@ class CategoryChip extends StatelessWidget {
               Icon(
                 icon,
                 size: 16,
-                color: isSelected ? AppTheme.primary : AppTheme.onSurface,
+                color: isSelected ? AppTheme.primary : Colors.white,
               ),
               const SizedBox(width: 8),
             ],
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: isSelected ? AppTheme.primary : AppTheme.onSurface,
+                color: isSelected ? AppTheme.primary : Colors.white,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
               ),
             ),
