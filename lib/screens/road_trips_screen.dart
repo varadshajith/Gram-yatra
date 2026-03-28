@@ -235,7 +235,7 @@ class _RoadTripCardState extends State<_RoadTripCard> {
                           Text(
                             AppStrings.aiTrafficAlert,
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: AppTheme.secondary,
+                              color: const Color(0xFF1A0A2E),
                               letterSpacing: 1,
                             ),
                           ),

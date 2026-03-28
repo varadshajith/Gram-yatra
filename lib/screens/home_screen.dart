@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: GradientButton(
                       label: AppStrings.buildPlanToday,
                       icon: Icons.auto_awesome,
-                      onPressed: () => Navigator.pushNamed(context, '/plan-builder'),
+                      onPressed: () => Navigator.pushNamed(context, '/plan-screen'),
                     ),
                   ),
 
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, '/map');
                   break;
                 case 2:
-                  Navigator.pushNamed(context, '/plan-builder');
+                  Navigator.pushNamed(context, '/plan-screen');
                   break;
                 case 3:
                   Navigator.pushNamed(context, '/sos');
@@ -383,10 +383,22 @@ class _SectionTab extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: AppTheme.surfaceContainerLow,
+            gradient: const LinearGradient(
+              colors: [Colors.white, Color(0xFFF5EFE6)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
             borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+            border: Border.all(color: const Color(0xFFE0D5C5)),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Center(
             child: Row(
@@ -397,7 +409,7 @@ class _SectionTab extends StatelessWidget {
                 Text(
                   label,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

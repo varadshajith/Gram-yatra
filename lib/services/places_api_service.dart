@@ -45,7 +45,24 @@ class PlacesApiService {
     // 1. Try reading from SQLite cache
     final localPlaces = await DbService.instance.getAllPlaces();
     if (localPlaces.isNotEmpty) {
+<<<<<<< HEAD
       return localPlaces;
+=======
+      // Rebuild the expected nested JSON structure from a flat DB row
+      return localPlaces.map((row) {
+        return {
+          'xid': row['xid'],
+          'name': row['name'],
+          'kinds': row['kinds'],
+          'osm': row['osm'],
+          'dist': row['dist'],
+          'point': {
+            'lon': row['lon'],
+            'lat': row['lat'],
+          }
+        };
+      }).toList();
+>>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
     }
 
     // 2. If SQLite is empty, fall back to bundled assets JSON

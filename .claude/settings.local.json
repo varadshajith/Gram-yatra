@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/HP/Downloads/**)",
+      "Bash(unzip -l gramyatra_all_fixes.zip)",
+      "Bash(rm -rf zip_extract)",
+      "Bash(mkdir zip_extract)",
+      "Bash(unzip -q gramyatra_all_fixes.zip -d zip_extract/)"
+    ]
+  }
+}

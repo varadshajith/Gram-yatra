@@ -162,13 +162,67 @@ class PlaceDetailScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: ElevatedButton.icon(
-                          icon: const Icon(Icons.add_rounded),
-                          label: const Text('Add to My Plan'),
-                          style: ElevatedButton.styleFrom(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.auto_awesome, size: 16, color: Colors.white),
+                          label: Text(
+                            'AI Story Mode',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: AppTheme.primary,
-                            foregroundColor: Colors.white,
+                            side: const BorderSide(color: Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                            ),
+                          ),
+                          onPressed: () {
+                            // TODO: wire to AI story mode
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.view_in_ar_rounded, size: 16, color: Colors.white),
+                          label: Text(
+                            'AR/VR View',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            side: const BorderSide(color: Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/ar-view', arguments: name);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.add_rounded, size: 16, color: Colors.white),
+                          label: Text(
+                            'Add to Plan',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            side: const BorderSide(color: Colors.white),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppTheme.radiusFull),
                             ),
@@ -182,29 +236,6 @@ class PlaceDetailScreen extends StatelessWidget {
                                 ),
                               );
                             }
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          icon: const Icon(Icons.view_in_ar_rounded, color: Colors.white),
-                          label: Text(
-                            'AR/VR View',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: const BorderSide(color: Colors.white),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(AppTheme.radiusFull),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/ar-view', arguments: name);
                           },
                         ),
                       ),

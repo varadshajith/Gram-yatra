@@ -75,7 +75,7 @@ class EventCard extends StatelessWidget {
                         child: Text(
                           timeOrDate,
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: AppTheme.secondary,
+                            color: const Color(0xFF1A0A2E),
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -107,10 +107,33 @@ class EventCard extends StatelessWidget {
                 child: Text(
                   highlight!.toUpperCase(),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: AppTheme.secondary,
+                    color: const Color(0xFF1A0A2E),
                     letterSpacing: 1.0,
                     fontWeight: FontWeight.w700,
                   ),
+                ),
+              ),
+              const SizedBox(height: AppTheme.spacingSmall),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF1A0A2E)),
+                  label: Text(
+                    'AI Story Mode',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: const Color(0xFF1A0A2E),
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    side: const BorderSide(color: Color(0xFF1A0A2E)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {},
                 ),
               ),
             ],
