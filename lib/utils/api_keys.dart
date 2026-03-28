@@ -1,17 +1,12 @@
 class ApiKeys {
-<<<<<<< HEAD
-  // TODO: Replace with your actual OpenTripMap API key
-  // You can register for a free key at https://opentripmap.io/product
+  // OpenTripMap API key — replace with your actual key or use .env
   static const String openTripMapKey = 'YOUR_API_KEY_HERE';
+
   static const String backendUrl = String.fromEnvironment(
     'BACKEND_URL',
-    defaultValue: 'http://10.0.2.2:3000',
+    defaultValue: 'https://gram-yatra-production.up.railway.app',
   );
-=======
-  static String get openTripMapKey => dotenv.env['OPENTRIPMAP_API_KEY'] ?? '';
-  
-  static const String backendUrl = 'https://gram-yatra-production.up.railway.app';
->>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
-  
-  static const String weatherApiKey = 'd7cf90b2b80fe93fb42cb810776bd090'; // Use generic fallback for hackathon
+
+  static const String weatherApiKey = 'd7cf90b2b80fe93fb42cb810776bd090'; // User generic fallback for hackathon
+  static const String groqApiKey = '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';
 }

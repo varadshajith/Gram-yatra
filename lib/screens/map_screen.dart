@@ -1,17 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:flutter/services.dart';
-=======
 import 'package:flutter/services.dart' show rootBundle;
->>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../services/audio_guide_service.dart';
+import '../utils/theme.dart';
 
-<<<<<<< HEAD
-=======
 /// Screen: Map & Explore — color-coded POI pins loaded from places.json
 /// Yug's scope: map_screen.dart, POI data, Google Maps integration
->>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
@@ -20,102 +15,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-<<<<<<< HEAD
-  List<dynamic> _allPlaces = [];
-  final Set<String> _selectedCategories = {'Pilgrimage', 'Nature', 'Food', 'Adventure'};
-  final List<String> _categories = ['Pilgrimage', 'Nature', 'Food', 'Adventure'];
-  @override
-  void initState() {
-    super.initState();
-    _loadPlaces();
-  }
-
-  Future<void> _loadPlaces() async {
-    try {
-      final String response = await rootBundle.loadString('assets/data/places.json');
-      final data = await json.decode(response);
-      setState(() {
-        _allPlaces = data;
-      });
-    } catch (e) {
-      debugPrint("Error loading places.json: $e");
-    }
-  }
-
-  void _showBottomSheet(dynamic place) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  place['photoUrl'] ?? 'https://via.placeholder.com/400x300',
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.broken_image, size: 100),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                place['name'] ?? 'Unknown',
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.blue.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  place['category'] ?? '',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                place['description'] ?? 'No description available.',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Set<Marker> _buildMarkers() {
-    Set<Marker> markers = {};
-    for (var place in _allPlaces) {
-      if (_selectedCategories.contains(place['category'])) {
-        markers.add(
-          Marker(
-            markerId: MarkerId(place['name']),
-            position: LatLng(place['lat'], place['lng']),
-            onTap: () => _showBottomSheet(place),
-            infoWindow: InfoWindow(title: place['name']),
-          ),
-        );
-      }
-    }
-    return markers;
-=======
   GoogleMapController? _mapController;
   final Set<Marker> _markers = {};
   List<Map<String, dynamic>> _places = [];
@@ -170,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
   void _buildMarkers() {
     final filtered = _selectedCategory == 'All'
         ? _places
-        : _places.where((p) => p['category'] == _selectedCategory).toList();
+        : _places.where((p) => p['category']?.toString().toLowerCase() == _selectedCategory.toLowerCase()).toList();
 
     final newMarkers = <Marker>{};
 
@@ -181,7 +80,7 @@ class _MapScreenState extends State<MapScreen> {
 
       newMarkers.add(
         Marker(
-          markerId: MarkerId(place['xid'] ?? place['name']),
+          markerId: MarkerId(place['xid'] ?? place['name'] ?? UniqueKey().toString()),
           position: LatLng(lat, lng),
           icon: BitmapDescriptor.defaultMarkerWithHue(_hueForCategory(place['category'])),
           infoWindow: InfoWindow(
@@ -238,54 +137,11 @@ class _MapScreenState extends State<MapScreen> {
   void _onCategorySelected(String category) {
     setState(() => _selectedCategory = category);
     _buildMarkers();
->>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      appBar: AppBar(
-        title: const Text('Nashik Tourism Map'),
-      ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: _categories.map((category) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: FilterChip(
-                    label: Text(category),
-                    selected: _selectedCategories.contains(category),
-                    onSelected: (bool selected) {
-                      setState(() {
-                        if (selected) {
-                          _selectedCategories.add(category);
-                        } else {
-                          _selectedCategories.remove(category);
-                        }
-                      });
-                    },
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          Expanded(
-            child: _allPlaces.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : GoogleMap(
-                    initialCameraPosition: const CameraPosition(
-                      target: LatLng(20.0059, 73.7940), // Center of Nashik roughly
-                      zoom: 11,
-                    ),
-                    markers: _buildMarkers(),
-                    zoomControlsEnabled: true,
-                  ),
-=======
       body: Stack(
         children: [
           // Google Map
@@ -308,7 +164,7 @@ class _MapScreenState extends State<MapScreen> {
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
               child: Row(
                 children: [
-                  // Back button
+                   // Back button
                   Container(
                     decoration: BoxDecoration(
                       color: AppTheme.surface.withValues(alpha: 0.9),
@@ -470,7 +326,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
 
     try {
       _summary ??= await widget.audioGuide.getSummary(
-        placeId: widget.place['xid'] ?? widget.place['name'],
+        placeId: widget.place['xid'] ?? widget.place['name'] ?? UniqueKey().toString(),
         name: widget.place['name'] ?? '',
         description: widget.place['description'],
         category: widget.place['category'],
@@ -504,7 +360,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
     final category = place['category'] ?? '';
     final rating = place['rate'] ?? 0;
     final kinds = place['kinds'] ?? '';
-    final photo = place['photo'] as String?;
+    final photo = place['photoUrl'] as String?;
 
     return Container(
       decoration: const BoxDecoration(
@@ -514,7 +370,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Handle
           Container(
             margin: const EdgeInsets.only(top: 12),
             width: 40,
@@ -524,27 +379,25 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-
-          // Photo header (if available)
-          if (photo != null && photo.startsWith('assets/'))
+          if (photo != null)
             Container(
               margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               height: 160,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
-                  image: AssetImage(photo),
+                  image: (photo.startsWith('http') 
+                      ? NetworkImage(photo) 
+                      : AssetImage(photo)) as ImageProvider,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Category label
                 Row(
                   children: [
                     Container(
@@ -564,7 +417,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       ),
                     ),
                     const Spacer(),
-                    // Rating stars
                     if (rating > 0) ...[
                       const Icon(Icons.star_rounded, size: 16, color: AppTheme.secondary),
                       const SizedBox(width: 2),
@@ -578,10 +430,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ],
                   ],
                 ),
-
                 const SizedBox(height: 12),
-
-                // Place name + audio guide button
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -594,8 +443,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       ),
                     ),
                     const SizedBox(width: 12),
-
-                    // Audio guide button (inline — no separate widget needed)
                     GestureDetector(
                       onTap: _audioLoading ? null : _onAudioTap,
                       child: Container(
@@ -638,10 +485,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 4),
-
-                // Audio label
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -653,10 +497,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
-
-                // Description
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -664,8 +505,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     height: 1.5,
                   ),
                 ),
-
-                // Show summary text if available
                 if (_summary != null) ...[
                   const SizedBox(height: 16),
                   Container(
@@ -707,10 +546,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ),
                 ],
-
                 const SizedBox(height: 16),
-
-                // Tags
                 if (kinds.isNotEmpty)
                   Wrap(
                     spacing: 6,
@@ -732,11 +568,9 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       );
                     }).toList(),
                   ),
-
                 const SizedBox(height: 16),
               ],
             ),
->>>>>>> 4a346b892c20e97bdcde7515fb32eabfd9275833
           ),
         ],
       ),
