@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Trimbakeshwar Temple",
+    "lat": 19.9320,
+    "lng": 73.5312,
+    "category": "Pilgrimage",
+    "description": "An ancient Hindu temple dedicated to Lord Shiva, and one of the twelve Jyotirlingas.",
+    "photoUrl": "https://picsum.photos/seed/trimbakeshwar/400/300"
+  },
+  {
+    "name": "Panchvati",
+    "lat": 20.0076,
+    "lng": 73.7915,
+    "category": "Pilgrimage",
+    "description": "A holy site by the Godavari river, believed to have been Lord Rama's home during his exile.",
+    "photoUrl": "https://picsum.photos/seed/panchvati/400/300"
+  },
+  {
+    "name": "Ramkund",
+    "lat": 20.0051,
+    "lng": 73.7925,
+    "category": "Pilgrimage",
+    "description": "A sacred bathing ghat on the banks of the Godavari river.",
+    "photoUrl": "https://picsum.photos/seed/ramkund/400/300"
+  },
+  {
+    "name": "Kalaram Temple",
+    "lat": 20.0058,
+    "lng": 73.7946,
+    "category": "Pilgrimage",
+    "description": "A historic Hindu temple dedicated to Lord Rama, renowned for its black stone architecture.",
+    "photoUrl": "https://picsum.photos/seed/kalaram/400/300"
+  },
+  {
+    "name": "Sita Gufaa",
+    "lat": 20.0052,
+    "lng": 73.7961,
+    "category": "Pilgrimage",
+    "description": "A prominent cave associated with the epic Ramayana.",
+    "photoUrl": "https://picsum.photos/seed/sitagufaa/400/300"
+  },
+  {
+    "name": "Muktidham",
+    "lat": 19.9678,
+    "lng": 73.8266,
+    "category": "Pilgrimage",
+    "description": "A marble temple complex housing replicas of all twelve Jyotirlingas.",
+    "photoUrl": "https://picsum.photos/seed/muktidham/400/300"
+  },
+  {
+    "name": "Dugarwadi Waterfall",
+    "lat": 20.0084,
+    "lng": 73.4989,
+    "category": "Nature",
+    "description": "A scenic, pristine waterfall surrounded by lush green mountains.",
+    "photoUrl": "https://picsum.photos/seed/dugarwadi/400/300"
+  },
+  {
+    "name": "Gangapur Dam",
+    "lat": 20.0381,
+    "lng": 73.6842,
+    "category": "Nature",
+    "description": "An earthfill dam providing picturesque views and boating facilities.",
+    "photoUrl": "https://picsum.photos/seed/gangapur/400/300"
+  },
+  {
+    "name": "Someshwar Waterfall",
+    "lat": 20.0321,
+    "lng": 73.7389,
+    "category": "Nature",
+    "description": "Also known as Dudhsagar waterfall of Nashik, a beautiful cascade near Someshwar temple.",
+    "photoUrl": "https://picsum.photos/seed/someshwarwater/400/300"
+  },
+  {
+    "name": "Godavari River Promenade",
+    "lat": 20.0080,
+    "lng": 73.7900,
+    "category": "Nature",
+    "description": "A calm riverside walkway perfect for morning and evening strolls.",
+    "photoUrl": "https://picsum.photos/seed/godavriprom/400/300"
+  },
+  {
+    "name": "Vihigaon Waterfall",
+    "lat": 19.7891,
+    "lng": 73.4688,
+    "category": "Nature",
+    "description": "A seasonal waterfall situated deep in the forests of the Western Ghats.",
+    "photoUrl": "https://picsum.photos/seed/vihigaon/400/300"
+  },
+  {
+    "name": "Tapovan",
+    "lat": 20.0091,
+    "lng": 73.8016,
+    "category": "Nature",
+    "description": "A lush green woodland associated with mythology and hermitage.",
+    "photoUrl": "https://picsum.photos/seed/tapovan/400/300"
+  },
+  {
+    "name": "Sula Vineyards",
+    "lat": 20.0044,
+    "lng": 73.6888,
+    "category": "Food",
+    "description": "India's most famous winery, offering vineyard tours, wine tasting, and fine dining.",
+    "photoUrl": "https://picsum.photos/seed/sula/400/300"
+  },
+  {
+    "name": "York Winery",
+    "lat": 20.0089,
+    "lng": 73.6865,
+    "category": "Food",
+    "description": "A serene vineyard known for excellent wines and a beautiful lakeside sunset view.",
+    "photoUrl": "https://picsum.photos/seed/york/400/300"
+  },
+  {
+    "name": "Sadhana Chulivarchi Misal",
+    "lat": 20.0435,
+    "lng": 73.7392,
+    "category": "Food",
+    "description": "Rustic eatery serving traditional Misal cooked over a wood fire.",
+    "photoUrl": "https://picsum.photos/seed/sadhana/400/300"
+  },
+  {
+    "name": "Bhausaheb Hire Misal",
+    "lat": 19.9982,
+    "lng": 73.7856,
+    "category": "Food",
+    "description": "One of the most authentic and famous spots in Nashik for traditional spicy Misal.",
+    "photoUrl": "https://picsum.photos/seed/bhausaheb/400/300"
+  },
+  {
+    "name": "Sayantara",
+    "lat": 19.9972,
+    "lng": 73.7885,
+    "category": "Food",
+    "description": "A classic spot known for sabudana vada and traditional Maharashtrian snacks.",
+    "photoUrl": "https://picsum.photos/seed/sayantara/400/300"
+  },
+  {
+    "name": "Vihang Restaurant",
+    "lat": 19.9863,
+    "lng": 73.7842,
+    "category": "Food",
+    "description": "A celebrated local restaurant known for hearty thalis and regional dishes.",
+    "photoUrl": "https://picsum.photos/seed/vihang/400/300"
+  },
+  {
+    "name": "Anjaneri Hill",
+    "lat": 19.9546,
+    "lng": 73.5786,
+    "category": "Adventure",
+    "description": "Considered the birthplace of Lord Hanuman, a popular and scenic trekking destination.",
+    "photoUrl": "https://picsum.photos/seed/anjaneri/400/300"
+  },
+  {
+    "name": "Pandavleni Caves",
+    "lat": 19.9405,
+    "lng": 73.7438,
+    "category": "Adventure",
+    "description": "A group of 24 ancient Buddhist rock-cut caves offering a great hike and views.",
+    "photoUrl": "https://picsum.photos/seed/pandavleni/400/300"
+  },
+  {
+    "name": "Nashik Caves",
+    "lat": 19.9407,
+    "lng": 73.7436,
+    "category": "Adventure",
+    "description": "The complex adjoining Pandavleni, exploring historical Buddhist viharas carved into the hillside.",
+    "photoUrl": "https://picsum.photos/seed/nashikcaves/400/300"
+  },
+  {
+    "name": "Harihar Fort",
+    "lat": 19.9042,
+    "lng": 73.4735,
+    "category": "Adventure",
+    "description": "A historic hill fort famous for its steep, almost near-vertical rock-cut steps.",
+    "photoUrl": "https://picsum.photos/seed/harihar/400/300"
+  },
+  {
+    "name": "Brahmagiri Hill",
+    "lat": 19.9162,
+    "lng": 73.5049,
+    "category": "Adventure",
+    "description": "The origin of the Godavari river, requiring a challenging trek through dense forest.",
+    "photoUrl": "https://picsum.photos/seed/brahmagiri/400/300"
+  },
+  {
+    "name": "Zonkers Adventure Park",
+    "lat": 20.0425,
+    "lng": 73.7420,
+    "category": "Adventure",
+    "description": "An outdoor park featuring zip-lining, go-karting, and artificial rock climbing.",
+    "photoUrl": "https://picsum.photos/seed/zonkers/400/300"
+  }
+]
