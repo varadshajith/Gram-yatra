@@ -9,7 +9,7 @@ class PlanScreen extends StatefulWidget {
 }
 
 class _PlanScreenState extends State<PlanScreen> {
-  final _gemini = GeminiService();
+  final _gemini = GeminiDirectService();
 
   // User inputs
   int _hours = 4;

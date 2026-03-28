@@ -9,14 +9,17 @@ class PlanResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final aiPlanString = ModalRoute.of(context)?.settings.arguments as String?;
+    final aiPlanData = ModalRoute.of(context)?.settings.arguments;
+    final List<String> aiStops = aiPlanData is List<String> 
+        ? aiPlanData 
+        : (aiPlanData is String ? [aiPlanData] : []);
     
     // Wire to real Gemini API via Firebase Functions
-    final plans = aiPlanString != null 
+    final plans = aiPlanData != null 
       ? [{
           'name': 'AI Custom Itinerary',
           'tagline': 'Crafted specifically to your preferences',
-          'stops': [aiPlanString], // Loading the huge string purely into stops
+          'stops': aiStops,
           'estimatedCost': 'Custom',
           'highlights': 'Powered by Gemini',
           'duration': 'Custom'

@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: GradientButton(
                       label: AppStrings.buildPlanToday,
                       icon: Icons.auto_awesome,
-                      onPressed: () => Navigator.pushNamed(context, '/plan-builder'),
+                      onPressed: () => Navigator.pushNamed(context, '/plan-screen'),
                     ),
                   ),
 
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, '/map');
                   break;
                 case 2:
-                  Navigator.pushNamed(context, '/plan-builder');
+                  Navigator.pushNamed(context, '/plan-screen');
                   break;
                 case 3:
                   Navigator.pushNamed(context, '/sos');
