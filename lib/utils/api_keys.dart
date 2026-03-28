@@ -1,7 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiKeys {
-  // TODO: Replace with your actual OpenTripMap API key
-  // You can register for a free key at https://opentripmap.io/product
-  static const String openTripMapKey = 'YOUR_API_KEY_HERE';
+  static String get openTripMapKey => dotenv.env['OPENTRIPMAP_API_KEY'] ?? '';
+  
   static const String backendUrl = String.fromEnvironment(
     'BACKEND_URL',
     defaultValue: 'http://10.0.2.2:3000',

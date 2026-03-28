@@ -1,0 +1,21 @@
+ M .gitignore
+ M android/gradle/wrapper/gradle-wrapper.properties
+ M assets/data/places.json
+ M lib/main.dart
+ M lib/screens/ar_view_screen.dart
+ M lib/services/places_api_service.dart
+ M linux/flutter/generated_plugin_registrant.cc
+ M linux/flutter/generated_plugin_registrant.h
+ M linux/flutter/generated_plugins.cmake
+ M macos/Flutter/GeneratedPluginRegistrant.swift
+ M pubspec.lock
+ M pubspec.yaml
+ M windows/flutter/generated_plugin_registrant.cc
+ M windows/flutter/generated_plugin_registrant.h
+ M windows/flutter/generated_plugins.cmake
+?? .vscode/
+?? "C\357\200\272UsersHPGram-yatragit_status.txt"
+?? lib/models/
+?? lib/screens/plan_screen.dart
+?? lib/services/gemini_services.dart
+?? nul
