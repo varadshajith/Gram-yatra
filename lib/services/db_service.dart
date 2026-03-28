@@ -20,14 +20,16 @@ class DbService {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    // Bumping version to 2 to bypass old grammar entirely
+    // Bumping version to 3 to bypass old grammar and add new tables
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         await db.execute('DROP TABLE IF EXISTS places');
         await db.execute('DROP TABLE IF EXISTS itineraries');
+        await db.execute('DROP TABLE IF EXISTS favourites');
+        await db.execute('DROP TABLE IF EXISTS trips');
         await _createDB(db, newVersion);
       },
     );
@@ -51,6 +53,26 @@ CREATE TABLE itineraries (
   id TEXT PRIMARY KEY,
   title TEXT,
   content TEXT,
+  synced INTEGER,
+  createdAt INTEGER
+)
+''');
+
+    await db.execute('''
+CREATE TABLE favourites (
+  id TEXT PRIMARY KEY,
+  placeId TEXT,
+  name TEXT,
+  synced INTEGER,
+  createdAt INTEGER
+)
+''');
+
+    await db.execute('''
+CREATE TABLE trips (
+  id TEXT PRIMARY KEY,
+  title TEXT,
+  description TEXT,
   synced INTEGER,
   createdAt INTEGER
 )
@@ -131,5 +153,43 @@ CREATE TABLE itineraries (
       where: 'id = ?',
       whereArgs: [id],
     );
+  }
+
+  // Fallback Methods for Favourites
+  Future<void> saveFavouritePlace(Map<String, dynamic> placeData) async {
+    final db = await instance.database;
+    final id = DateTime.now().microsecondsSinceEpoch.toString();
+
+    await db.insert('favourites', {
+      'id': id,
+      'placeId': placeData['placeId'] ?? '',
+      'name': placeData['name'] ?? '',
+      'synced': 0,
+      'createdAt': DateTime.now().millisecondsSinceEpoch,
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getUserFavourites() async {
+    final db = await instance.database;
+    return await db.query('favourites', orderBy: 'createdAt DESC');
+  }
+
+  // Fallback Methods for Trips
+  Future<void> saveTripHistory(Map<String, dynamic> tripData) async {
+    final db = await instance.database;
+    final id = DateTime.now().microsecondsSinceEpoch.toString();
+
+    await db.insert('trips', {
+      'id': id,
+      'title': tripData['title'] ?? '',
+      'description': tripData['description'] ?? '',
+      'synced': 0,
+      'createdAt': DateTime.now().millisecondsSinceEpoch,
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getUserTrips() async {
+    final db = await instance.database;
+    return await db.query('trips', orderBy: 'createdAt DESC');
   }
 }

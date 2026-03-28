@@ -151,7 +151,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                         label: AppStrings.beginJourney,
                         icon: Icons.arrow_forward_rounded,
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/profile-setup');
+                          Navigator.pushReplacementNamed(context, '/login');
                         },
                       ),
                     ),

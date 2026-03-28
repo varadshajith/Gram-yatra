@@ -3,7 +3,7 @@ import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/category_chip.dart';
-import '../services/gemini_service.dart';
+import '../services/gemini_services.dart';
 
 /// Screen 5: AI Plan Builder Form
 class PlanBuilderScreen extends StatefulWidget {
@@ -17,6 +17,8 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
   double _hours = 4;
   double _budget = 1000;
   final Set<String> _selectedPrefs = {};
+  String _groupType = 'Friends'; // Default for Yash's service
+  String _crowdLevel = 'low';    // Default for Yash's service
 
   final _preferences = [
     {'label': AppStrings.pilgrimage, 'icon': Icons.account_balance},
@@ -199,14 +201,22 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
                       builder: (ctx) => const Center(child: CircularProgressIndicator()),
                     );
                     try {
-                      final String planString = await GeminiService().generatePlan(
-                        preferences: _selectedPrefs.toList(),
-                        days: (_hours / 4).ceil(),
-                        budget: _budget.toInt().toString(),
+                      final planData = await GeminiDirectService().generatePlan(
+                        hours: _hours.toInt(),
+                        budget: _budget.toInt(),
+                        preferences: _selectedPrefs.join(','),
+                        groupType: _groupType,
+                        crowdLevel: _crowdLevel,
+                        lat: 0,
+                        lng: 0,
                       );
+
+                      // Convert to List<String> for Tanvi's results screen
+                      final List<String> stops = planData.map((s) => s['place'].toString()).toList();
+
                       if (context.mounted) {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, '/plan-results', arguments: planString);
+                        Navigator.pushNamed(context, '/plan-results', arguments: stops);
                       }
                     } catch (e) {
                       if (context.mounted) {
@@ -218,6 +228,7 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
                     }
                   },
                 ),
+
 
                 const SizedBox(height: 40),
               ],

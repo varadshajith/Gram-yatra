@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 import 'utils/theme.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/profile_setup_screen.dart';
 import 'screens/user_profile_screen.dart';
 import 'screens/home_screen.dart';
@@ -23,6 +24,7 @@ import 'screens/map_screen.dart';
 import 'screens/sos_screen.dart';
 import 'screens/kumbh_screen.dart';
 import 'screens/plan_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,9 +44,26 @@ class GramYatraApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       themeMode: ThemeMode.light,
-      initialRoute: '/',
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          }
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const Scaffold(body: Center(child: Text('Login UI Placeholder')));
+        },
+      ),
       routes: {
+<<<<<<< HEAD
+        '/welcome': (context) => const WelcomeScreen(),
+        '/login': (context) => const Scaffold(body: Center(child: Text('Login UI Placeholder'))),
+=======
         '/': (context) => const WelcomeScreen(),
+        '/login': (context) => const LoginScreen(),
+>>>>>>> origin/tanvi
         '/profile-setup': (context) => const ProfileSetupScreen(),
         '/user-profile': (context) => const UserProfileScreen(),
         '/home': (context) => const HomeScreen(),
