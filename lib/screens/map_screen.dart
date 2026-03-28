@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../utils/theme.dart';
 import '../services/audio_guide_service.dart';
+import '../utils/theme.dart';
 
 /// Screen: Map & Explore — color-coded POI pins loaded from places.json
 /// Yug's scope: map_screen.dart, POI data, Google Maps integration
@@ -69,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
   void _buildMarkers() {
     final filtered = _selectedCategory == 'All'
         ? _places
-        : _places.where((p) => p['category'] == _selectedCategory).toList();
+        : _places.where((p) => p['category']?.toString().toLowerCase() == _selectedCategory.toLowerCase()).toList();
 
     final newMarkers = <Marker>{};
 
@@ -80,7 +80,7 @@ class _MapScreenState extends State<MapScreen> {
 
       newMarkers.add(
         Marker(
-          markerId: MarkerId(place['xid'] ?? place['name']),
+          markerId: MarkerId(place['xid'] ?? place['name'] ?? UniqueKey().toString()),
           position: LatLng(lat, lng),
           icon: BitmapDescriptor.defaultMarkerWithHue(_hueForCategory(place['category'])),
           infoWindow: InfoWindow(
@@ -164,7 +164,7 @@ class _MapScreenState extends State<MapScreen> {
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
               child: Row(
                 children: [
-                  // Back button
+                   // Back button
                   Container(
                     decoration: BoxDecoration(
                       color: AppTheme.surface.withValues(alpha: 0.9),
@@ -326,7 +326,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
 
     try {
       _summary ??= await widget.audioGuide.getSummary(
-        placeId: widget.place['xid'] ?? widget.place['name'],
+        placeId: widget.place['xid'] ?? widget.place['name'] ?? UniqueKey().toString(),
         name: widget.place['name'] ?? '',
         description: widget.place['description'],
         category: widget.place['category'],
@@ -360,7 +360,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
     final category = place['category'] ?? '';
     final rating = place['rate'] ?? 0;
     final kinds = place['kinds'] ?? '';
-    final photo = place['photo'] as String?;
+    final photo = place['photoUrl'] as String?;
 
     return Container(
       decoration: const BoxDecoration(
@@ -370,7 +370,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Handle
           Container(
             margin: const EdgeInsets.only(top: 12),
             width: 40,
@@ -380,27 +379,25 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-
-          // Photo header (if available)
-          if (photo != null && photo.startsWith('assets/'))
+          if (photo != null)
             Container(
               margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               height: 160,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
-                  image: AssetImage(photo),
+                  image: (photo.startsWith('http') 
+                      ? NetworkImage(photo) 
+                      : AssetImage(photo)) as ImageProvider,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Category label
                 Row(
                   children: [
                     Container(
@@ -420,7 +417,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       ),
                     ),
                     const Spacer(),
-                    // Rating stars
                     if (rating > 0) ...[
                       const Icon(Icons.star_rounded, size: 16, color: AppTheme.secondary),
                       const SizedBox(width: 2),
@@ -434,10 +430,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ],
                   ],
                 ),
-
                 const SizedBox(height: 12),
-
-                // Place name + audio guide button
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -450,8 +443,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       ),
                     ),
                     const SizedBox(width: 12),
-
-                    // Audio guide button (inline — no separate widget needed)
                     GestureDetector(
                       onTap: _audioLoading ? null : _onAudioTap,
                       child: Container(
@@ -494,10 +485,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 4),
-
-                // Audio label
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -509,10 +497,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
-
-                // Description
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -520,8 +505,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     height: 1.5,
                   ),
                 ),
-
-                // Show summary text if available
                 if (_summary != null) ...[
                   const SizedBox(height: 16),
                   Container(
@@ -563,10 +546,7 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                     ),
                   ),
                 ],
-
                 const SizedBox(height: 16),
-
-                // Tags
                 if (kinds.isNotEmpty)
                   Wrap(
                     spacing: 6,
@@ -588,7 +568,6 @@ class _PlaceBottomSheetState extends State<_PlaceBottomSheet> {
                       );
                     }).toList(),
                   ),
-
                 const SizedBox(height: 16),
               ],
             ),

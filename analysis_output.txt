@@ -1,0 +1,17 @@
+Analyzing Gram-yatra...                                         
+
+warning - Unused import: '../utils/theme.dart' - lib\screens\local_business_screen.dart:2:8 - unused_import
+  error - Missing concrete implementation of 'State.build' - lib\screens\map_screen.dart:314:7 - non_abstract_class_inherits_abstract_member
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:320:19 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:421:32 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:421:55 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:422:34 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:423:33 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:424:36 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:425:29 - undefined_identifier
+  error - Undefined name 'widget' - lib\screens\map_screen.dart:426:29 - undefined_identifier
+  error - Undefined name '_summary' - lib\screens\map_screen.dart:446:21 - undefined_identifier
+  error - Undefined name '_summary' - lib\screens\map_screen.dart:477:27 - undefined_identifier
+  error - Expected a method, getter, setter or operator declaration - lib\screens\map_screen.dart:521:1 - expected_executable
+
+13 issues found. (ran in 3.5s)

@@ -25,6 +25,8 @@ dependencies:
   webview_flutter: ^4.13.1
   google_maps_flutter: ^2.16.0
   connectivity_plus: ^7.0.0
+  flutter_tts: any
+  cloud_functions: any
 
 dev_dependencies:
   flutter_test:
