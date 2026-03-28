@@ -3,6 +3,7 @@ import '../utils/theme.dart';
 import '../utils/strings.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/category_chip.dart';
+import '../services/gemini_service.dart';
 
 /// Screen 5: AI Plan Builder Form
 class PlanBuilderScreen extends StatefulWidget {
@@ -191,8 +192,30 @@ class _PlanBuilderScreenState extends State<PlanBuilderScreen> {
                 // Generate
                 GradientButton(
                   label: AppStrings.generatePlan,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/plan-results');
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (ctx) => const Center(child: CircularProgressIndicator()),
+                    );
+                    try {
+                      final String planString = await GeminiService().generatePlan(
+                        preferences: _selectedPrefs.toList(),
+                        days: (_hours / 4).ceil(),
+                        budget: _budget.toInt().toString(),
+                      );
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/plan-results', arguments: planString);
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Error generating plan')),
+                        );
+                      }
+                    }
                   },
                 ),
 

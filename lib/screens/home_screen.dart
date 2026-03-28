@@ -8,6 +8,7 @@ import '../widgets/place_card.dart';
 import '../widgets/event_card.dart';
 import '../widgets/glassmorphism_nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/weather_service.dart';
 
 /// Screen 4: Main Explore Nashik Home Hub
 class HomeScreen extends StatefulWidget {
@@ -132,7 +133,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 16),
+
+                  // Weather & Crowd Tags
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      children: [
+                        _WeatherWidget(),
+                        const SizedBox(width: 12),
+                        _CrowdWidget(),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
 
                   // Build Your Plan CTA
                   Padding(
@@ -393,3 +408,92 @@ class _SectionTab extends StatelessWidget {
     );
   }
 }
+
+class _WeatherWidget extends StatefulWidget {
+  @override
+  State<_WeatherWidget> createState() => _WeatherWidgetState();
+}
+
+class _WeatherWidgetState extends State<_WeatherWidget> {
+  Map<String, dynamic>? _weather;
+
+  @override
+  void initState() {
+    super.initState();
+    WeatherService().fetchNashikWeather().then((data) {
+      if (mounted) setState(() => _weather = data);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_weather == null) return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.network(_weather!['iconUrl'] as String, width: 20, height: 20),
+          const SizedBox(width: 6),
+          Text(
+            '${_weather!['temp']}°C | ${_weather!['condition']}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppTheme.primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CrowdWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final hour = DateTime.now().hour;
+    Color badgeColor;
+    String label;
+
+    if (hour >= 6 && hour <= 11) {
+      badgeColor = Colors.green;
+      label = 'Low Crowd';
+    } else if (hour >= 12 && hour <= 17) {
+      badgeColor = Colors.orange;
+      label = 'Medium Crowd';
+    } else if (hour >= 18 && hour <= 22) {
+      badgeColor = Colors.red;
+      label = 'High Crowd';
+    } else {
+      badgeColor = Colors.grey;
+      label = 'Closed';
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: badgeColor.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(AppTheme.radiusFull),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.groups, size: 16, color: badgeColor),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: badgeColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
